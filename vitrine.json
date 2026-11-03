@@ -1,0 +1,72 @@
+{
+  "id": "dev.vitrine.essentials",
+  "name": "Essentials",
+  "version": "2.0.0",
+  "author": "Emanuele Frascella",
+  "description": "Clock, calendar, system, network, battery and weather widgets in the Windows 11 style",
+  "homepage": "https://github.com/vitrine-widgets/essentials",
+  "minEngine": "2.0.0",
+  "widgets": [
+    {
+      "id": "clock",
+      "name": "Clock",
+      "description": "Time and date in your locale",
+      "entry": "src/clock/index.tsx",
+      "settings": "src/clock/settings.json",
+      "preview": "src/clock/preview.png",
+      "size": { "default": [2, 1], "min": [2, 1], "max": [4, 2] },
+      "permissions": []
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "description": "Month view with today highlighted",
+      "entry": "src/calendar/index.tsx",
+      "settings": "src/calendar/settings.json",
+      "preview": "src/calendar/preview.png",
+      "size": { "default": [3, 3], "min": [3, 3], "max": [4, 4] },
+      "interactive": true,
+      "permissions": []
+    },
+    {
+      "id": "system",
+      "name": "System",
+      "description": "CPU, memory and disk usage",
+      "entry": "src/system/index.tsx",
+      "settings": "src/system/settings.json",
+      "preview": "src/system/preview.png",
+      "size": { "default": [3, 2], "min": [3, 2], "max": [4, 2] },
+      "permissions": ["system.cpu", "system.memory", "system.drives"]
+    },
+    {
+      "id": "network",
+      "name": "Network",
+      "description": "Download and upload speed",
+      "entry": "src/network/index.tsx",
+      "settings": "src/network/settings.json",
+      "preview": "src/network/preview.png",
+      "size": { "default": [3, 1], "min": [3, 1], "max": [4, 1] },
+      "permissions": ["system.network"]
+    },
+    {
+      "id": "battery",
+      "name": "Battery",
+      "description": "Charge level and charging state",
+      "entry": "src/battery/index.tsx",
+      "settings": "src/battery/settings.json",
+      "preview": "src/battery/preview.png",
+      "size": { "default": [2, 1], "min": [2, 1], "max": [3, 1] },
+      "permissions": ["system.battery"]
+    },
+    {
+      "id": "weather",
+      "name": "Weather",
+      "description": "Current conditions and 3-day forecast from Open-Meteo",
+      "entry": "src/weather/index.tsx",
+      "settings": "src/weather/settings.json",
+      "preview": "src/weather/preview.png",
+      "size": { "default": [3, 2], "min": [3, 2], "max": [4, 2] },
+      "permissions": ["net:api.open-meteo.com", "net:geocoding-api.open-meteo.com"]
+    }
+  ]
+}

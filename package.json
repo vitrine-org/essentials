@@ -1,0 +1,15 @@
+{
+  "name": "vitrine-essentials",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vitrine-widget build",
+    "pack": "vitrine-widget pack",
+    "dev": "vitrine-widget dev"
+  },
+  "dependencies": {
+    "@vitrine/sdk": "file:../vitrine-sdk",
+    "solid-js": "^1.9.18"
+  }
+}

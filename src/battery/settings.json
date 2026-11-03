@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Battery",
+    "settings": {
+      "lowThreshold": { "type": "number", "default": 20, "label": "Low battery warning (%)", "min": 5, "max": 50, "step": 5 },
+      "showTime": { "type": "boolean", "default": true, "label": "Show time remaining" }
+    }
+  },
+  {
+    "title": "Appearance",
+    "settings": {
+      "theme": { "type": "string", "default": "auto", "label": "Theme", "options": [ { "value": "auto", "label": "Automatic" }, { "value": "dark", "label": "Dark" }, { "value": "light", "label": "Light" } ] },
+      "accent": { "type": "string", "default": "#60CDFF", "label": "Accent color", "pattern": "^#[0-9a-fA-F]{6}$", "patternMessage": "Use a hex color such as #60CDFF" }
+    }
+  }
+]
