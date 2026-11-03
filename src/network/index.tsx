@@ -1,6 +1,6 @@
 import { createEffect, createSignal } from "solid-js";
 import { mount, useSettings, useSize, useSystem } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, type Palette, palette } from "../shared/ui";
+import { Card, FONT_DISPLAY, type Palette, usePalette } from "../shared/ui";
 
 const HISTORY = 30;
 
@@ -66,8 +66,8 @@ function Reading(props: { p: Palette; up: boolean; value: [string, string]; labe
 }
 
 function Network() {
-  const s = useSettings({ theme: "auto", accent: "#60CDFF", units: "bits", interval: 1 });
-  const p = () => palette(s().theme, s().accent);
+  const s = useSettings({ theme: "auto", accent: "system", units: "bits", interval: 1 });
+  const p = usePalette(s);
   const size = useSize();
   const snap = useSystem(["network"], s().interval * 1000);
   const [rx, setRx] = createSignal<number[]>([]);

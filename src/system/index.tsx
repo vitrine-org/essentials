@@ -1,6 +1,6 @@
 import { Index } from "solid-js";
 import { formatBytes, mount, useSettings, useSize, useSystem } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, type Palette, clamp, palette } from "../shared/ui";
+import { Card, FONT_DISPLAY, type Palette, clamp, usePalette } from "../shared/ui";
 
 interface Gauge {
   label: string;
@@ -73,8 +73,8 @@ function Bar(props: { p: Palette; g: Gauge }) {
 }
 
 function System() {
-  const s = useSettings({ theme: "auto", accent: "#60CDFF", style: "rings", drive: "C", interval: 2 });
-  const p = () => palette(s().theme, s().accent);
+  const s = useSettings({ theme: "auto", accent: "system", style: "rings", drive: "C", interval: 2 });
+  const p = usePalette(s);
   const size = useSize();
   const snap = useSystem(["cpu", "memory", "drives"], s().interval * 1000);
 

@@ -1,6 +1,6 @@
 // Shared Fluent look for the essentials widgets: palette, card surface, hour format.
 import type { JSX } from "solid-js";
-import { localeInfo, type Style } from "@vitrine/sdk";
+import { localeInfo, useAppearance, type Style } from "@vitrine/sdk";
 
 export const FONT_DISPLAY = "Segoe UI Variable Display";
 export const FONT_TEXT = "Segoe UI Variable Text";
@@ -34,15 +34,35 @@ function luminance(hex: string): number {
   return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 }
 
+/** Mixes `hex` toward white (t > 0) or black (t < 0). */
+function mix(hex: string, t: number): string {
+  const to = t > 0 ? 255 : 0;
+  const a = Math.abs(t);
+  return (
+    "#" +
+    [1, 3, 5]
+      .map((i) => Math.round(parseInt(hex.slice(i, i + 2), 16) * (1 - a) + to * a).toString(16).padStart(2, "0"))
+      .join("")
+  );
+}
+
 /**
- * Windows 11 dark/light tokens. "auto" follows dark: the engine does not expose the
- * system theme yet, and translucent dark cards read well on most wallpapers.
+ * Windows 11 dark/light tokens. Theme "auto" and accent "system" follow Windows.
+ * The Windows accent is a mid tone: like Fluent, it is lightened on dark surfaces
+ * and darkened on light ones so text and rings stay readable.
  */
-export function palette(theme: string, accent: string): Palette {
-  const dark = theme !== "light";
-  let acc = /^#[0-9a-fA-F]{6}$/.test(accent) ? accent : DEFAULT_ACCENT;
-  // The default accent is the dark-theme variant; light theme uses Fluent's darker shade.
-  if (!dark && acc.toUpperCase() === DEFAULT_ACCENT) acc = "#005FB8";
+export function palette(theme: string, accent: string, system = { dark: true, accent: "#0078D4" }): Palette {
+  const dark = theme === "auto" ? system.dark : theme !== "light";
+  const valid = (c: string) => /^#[0-9a-fA-F]{6}$/.test(c);
+  let acc: string;
+  if (accent === "system" || !valid(accent)) {
+    const base = valid(system.accent) ? system.accent : "#0078D4";
+    acc = dark ? mix(base, 0.45) : mix(base, -0.2);
+  } else {
+    acc = accent;
+    // The default custom accent is the dark-theme variant; light theme uses Fluent's darker shade.
+    if (!dark && acc.toUpperCase() === DEFAULT_ACCENT) acc = "#005FB8";
+  }
   const onAccent = luminance(acc) > 0.35 ? "#000000" : "#FFFFFF";
   return dark
     ? {
@@ -79,6 +99,12 @@ export function palette(theme: string, accent: string): Palette {
         success: "#0F7B0F",
         caution: "#9D5D00",
       };
+}
+
+/** The widget palette from its theme/accent settings, live with Windows appearance changes. */
+export function usePalette(settings: () => { theme: string; accent: string }): () => Palette {
+  const system = useAppearance();
+  return () => palette(settings().theme, settings().accent, system());
 }
 
 /** Resolves the "hourFormat" setting (auto / 12 / 24) against the Windows locale. */

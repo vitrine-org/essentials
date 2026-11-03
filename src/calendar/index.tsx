@@ -1,6 +1,6 @@
 import { createSignal, For, type JSX } from "solid-js";
 import { formatDate, localeInfo, mount, useClock, useSettings, useSize } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, type Palette, palette } from "../shared/ui";
+import { Card, FONT_DISPLAY, type Palette, usePalette } from "../shared/ui";
 
 /** ISO-8601 week number. */
 function isoWeek(d: Date): number {
@@ -48,8 +48,8 @@ function NavButton(props: { p: Palette; dir: -1 | 1; size: number; onClick: () =
 }
 
 function Calendar() {
-  const s = useSettings({ theme: "auto", accent: "#60CDFF", firstDayOfWeek: "auto", showWeekNumbers: false });
-  const p = () => palette(s().theme, s().accent);
+  const s = useSettings({ theme: "auto", accent: "system", firstDayOfWeek: "auto", showWeekNumbers: false });
+  const p = usePalette(s);
   const now = useClock("minute");
   const size = useSize();
   const [offset, setOffset] = createSignal(0); // months from the current one

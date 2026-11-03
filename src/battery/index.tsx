@@ -1,5 +1,5 @@
 import { mount, useSettings, useSystem } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, type Palette, clamp, palette } from "../shared/ui";
+import { Card, FONT_DISPLAY, type Palette, clamp, usePalette } from "../shared/ui";
 
 function duration(sec: number): string {
   const h = Math.floor(sec / 3600);
@@ -43,8 +43,8 @@ function PlugIcon(props: { color: string }) {
 }
 
 function Battery() {
-  const s = useSettings({ theme: "auto", accent: "#60CDFF", lowThreshold: 20, showTime: true });
-  const p = () => palette(s().theme, s().accent);
+  const s = useSettings({ theme: "auto", accent: "system", lowThreshold: 20, showTime: true });
+  const p = usePalette(s);
   const snap = useSystem(["battery"], 10_000);
 
   const b = () => snap().battery;

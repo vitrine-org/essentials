@@ -1,6 +1,6 @@
 import { createEffect, createSignal, For, on, onCleanup } from "solid-js";
 import { formatDate, localeInfo, mount, useSettings, useSize, useStorage } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, type Palette, palette, uses12h } from "../shared/ui";
+import { Card, FONT_DISPLAY, type Palette, usePalette, uses12h } from "../shared/ui";
 
 const REFRESH_MS = 30 * 60 * 1000;
 
@@ -115,25 +115,12 @@ function OfflineIcon(props: { p: Palette }) {
 
 const day = (d: Day): Day => ({ date: d.date, code: d.code, max: Math.round(d.max), min: Math.round(d.min) });
 
-/**
- * GET with a workaround: the 2.0.0 SDK forwards `body: undefined` to the host, which the
- * engine rejects, so retry with an empty body when that happens.
- */
-async function get(url: string): Promise<any> {
-  try {
-    return await fetch(url);
-  } catch (e) {
-    if (!/undefined/.test(String(e))) throw e;
-    return fetch(url, { body: "" });
-  }
-}
-
 async function load(query: string, units: string, prev: Cache | null): Promise<Cache> {
   let place = prev?.place ?? "";
   let lat = prev?.lat ?? 0;
   let lon = prev?.lon ?? 0;
   if (!prev || prev.query !== query) {
-    const g = await get(
+    const g = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=${localeInfo().locale.slice(0, 2) || "en"}&format=json`,
     );
     if (!g.ok) throw new Error(`geocoding ${g.status}`);
@@ -143,7 +130,7 @@ async function load(query: string, units: string, prev: Cache | null): Promise<C
     lat = hit.latitude;
     lon = hit.longitude;
   }
-  const r = await get(
+  const r = await fetch(
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
       `&current=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min` +
       `&timezone=auto&forecast_days=4&temperature_unit=${units === "fahrenheit" ? "fahrenheit" : "celsius"}`,
@@ -168,8 +155,8 @@ async function load(query: string, units: string, prev: Cache | null): Promise<C
 }
 
 function Weather() {
-  const s = useSettings({ theme: "auto", accent: "#60CDFF", city: "Rome", units: "celsius", hourFormat: "auto" });
-  const p = () => palette(s().theme, s().accent);
+  const s = useSettings({ theme: "auto", accent: "system", city: "Rome", units: "celsius", hourFormat: "auto" });
+  const p = usePalette(s);
   const size = useSize();
   const [cache, setCache] = useStorage<Cache | null>("cache", null);
   const [error, setError] = createSignal<string | null>(null);

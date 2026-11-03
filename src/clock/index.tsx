@@ -1,11 +1,11 @@
 import { formatDate, mount, useClock, useSettings, useSize } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, clamp, palette, uses12h } from "../shared/ui";
+import { Card, FONT_DISPLAY, clamp, usePalette, uses12h } from "../shared/ui";
 
 function Clock() {
-  const s = useSettings({ theme: "auto", accent: "#60CDFF", hourFormat: "auto", showSeconds: false, showDate: true });
+  const s = useSettings({ theme: "auto", accent: "system", hourFormat: "auto", showSeconds: false, showDate: true });
   const now = useClock(s().showSeconds ? "second" : "minute");
   const size = useSize();
-  const p = () => palette(s().theme, s().accent);
+  const p = usePalette(s);
   const h12 = () => uses12h(s().hourFormat);
 
   // Scale the time to the card: limited by height (with the date line) and by width.
