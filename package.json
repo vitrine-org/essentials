@@ -1,11 +1,11 @@
 {
   "name": "vitrine-essentials",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vitrine-widget build",
-    "pack": "vitrine-widget pack",
+    "build": "vitrine-widget build && node scripts/assets.mjs",
+    "pack": "vitrine-widget build && node scripts/assets.mjs --zip",
     "dev": "vitrine-widget dev"
   },
   "dependencies": {

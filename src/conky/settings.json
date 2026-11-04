@@ -1,0 +1,580 @@
+[
+  {
+    "title": "Sections",
+    "titles": {
+      "it": "Sezioni",
+      "fr": "Sections",
+      "de": "Bereiche",
+      "es": "Secciones",
+      "pt-BR": "Seções",
+      "zh": "分区",
+      "ru": "Разделы",
+      "ja": "セクション",
+      "ko": "섹션"
+    },
+    "settings": {
+      "showSystem": {
+        "type": "boolean",
+        "default": true,
+        "label": "System",
+        "labels": {
+          "it": "Sistema",
+          "fr": "Système",
+          "de": "System",
+          "es": "Sistema",
+          "pt-BR": "Sistema",
+          "zh": "系统",
+          "ru": "Система",
+          "ja": "システム",
+          "ko": "시스템"
+        }
+      },
+      "showCpu": {
+        "type": "boolean",
+        "default": true,
+        "label": "CPU",
+        "labels": {
+          "it": "CPU",
+          "fr": "Processeur",
+          "de": "CPU",
+          "es": "CPU",
+          "pt-BR": "CPU",
+          "zh": "CPU",
+          "ru": "ЦП",
+          "ja": "CPU",
+          "ko": "CPU"
+        }
+      },
+      "showMemory": {
+        "type": "boolean",
+        "default": true,
+        "label": "Memory",
+        "labels": {
+          "it": "Memoria",
+          "fr": "Mémoire",
+          "de": "Arbeitsspeicher",
+          "es": "Memoria",
+          "pt-BR": "Memória",
+          "zh": "内存",
+          "ru": "Память",
+          "ja": "メモリ",
+          "ko": "메모리"
+        }
+      },
+      "showDrives": {
+        "type": "boolean",
+        "default": true,
+        "label": "Drives",
+        "labels": {
+          "it": "Unità",
+          "fr": "Lecteurs",
+          "de": "Laufwerke",
+          "es": "Unidades",
+          "pt-BR": "Unidades",
+          "zh": "驱动器",
+          "ru": "Диски",
+          "ja": "ドライブ",
+          "ko": "드라이브"
+        }
+      },
+      "showNetwork": {
+        "type": "boolean",
+        "default": true,
+        "label": "Network",
+        "labels": {
+          "it": "Rete",
+          "fr": "Réseau",
+          "de": "Netzwerk",
+          "es": "Red",
+          "pt-BR": "Rede",
+          "zh": "网络",
+          "ru": "Сеть",
+          "ja": "ネットワーク",
+          "ko": "네트워크"
+        }
+      },
+      "showBattery": {
+        "type": "boolean",
+        "default": true,
+        "label": "Battery",
+        "labels": {
+          "it": "Batteria",
+          "fr": "Batterie",
+          "de": "Akku",
+          "es": "Batería",
+          "pt-BR": "Bateria",
+          "zh": "电池",
+          "ru": "Батарея",
+          "ja": "バッテリー",
+          "ko": "배터리"
+        },
+        "description": "Shown only on devices with a battery",
+        "descriptions": {
+          "it": "Compare solo sui dispositivi con batteria",
+          "fr": "Affichée uniquement sur les appareils avec batterie",
+          "de": "Nur auf Geräten mit Akku sichtbar",
+          "es": "Solo aparece en dispositivos con batería",
+          "pt-BR": "Só aparece em dispositivos com bateria",
+          "zh": "仅在有电池的设备上显示",
+          "ru": "Показывается только на устройствах с батареей",
+          "ja": "バッテリー搭載のデバイスでのみ表示",
+          "ko": "배터리가 있는 장치에서만 표시됩니다"
+        }
+      },
+      "showWeather": {
+        "type": "boolean",
+        "default": false,
+        "label": "Weather",
+        "labels": {
+          "it": "Meteo",
+          "fr": "Météo",
+          "de": "Wetter",
+          "es": "Tiempo",
+          "pt-BR": "Clima",
+          "zh": "天气",
+          "ru": "Погода",
+          "ja": "天気",
+          "ko": "날씨"
+        },
+        "description": "One line under the date, from Open-Meteo",
+        "descriptions": {
+          "it": "Una riga sotto la data, da Open-Meteo",
+          "fr": "Une ligne sous la date, via Open-Meteo",
+          "de": "Eine Zeile unter dem Datum, von Open-Meteo",
+          "es": "Una línea bajo la fecha, de Open-Meteo",
+          "pt-BR": "Uma linha abaixo da data, do Open-Meteo",
+          "zh": "在日期下方显示一行，数据来自 Open-Meteo",
+          "ru": "Одна строка под датой, данные Open-Meteo",
+          "ja": "日付の下に 1 行で表示 (Open-Meteo)",
+          "ko": "날짜 아래에 한 줄로 표시(Open-Meteo)"
+        }
+      }
+    }
+  },
+  {
+    "title": "Weather",
+    "titles": {
+      "it": "Meteo",
+      "fr": "Météo",
+      "de": "Wetter",
+      "es": "Tiempo",
+      "pt-BR": "Clima",
+      "zh": "天气",
+      "ru": "Погода",
+      "ja": "天気",
+      "ko": "날씨"
+    },
+    "settings": {
+      "city": {
+        "type": "string",
+        "default": "Rome",
+        "label": "City",
+        "labels": {
+          "it": "Città",
+          "fr": "Ville",
+          "de": "Stadt",
+          "es": "Ciudad",
+          "pt-BR": "Cidade",
+          "zh": "城市",
+          "ru": "Город",
+          "ja": "都市",
+          "ko": "도시"
+        },
+        "description": "Any city name; the first match from Open-Meteo is used",
+        "descriptions": {
+          "it": "Il nome di una città qualsiasi; si usa il primo risultato di Open-Meteo",
+          "fr": "N’importe quel nom de ville ; le premier résultat d’Open-Meteo est utilisé",
+          "de": "Ein beliebiger Städtename; es wird der erste Treffer von Open-Meteo verwendet",
+          "es": "Cualquier nombre de ciudad; se usa el primer resultado de Open-Meteo",
+          "pt-BR": "Qualquer nome de cidade; é usado o primeiro resultado do Open-Meteo",
+          "zh": "任意城市名称，使用 Open-Meteo 的第一个匹配结果",
+          "ru": "Любое название города; используется первый результат Open-Meteo",
+          "ja": "任意の都市名。Open-Meteo の最初の候補を使います",
+          "ko": "아무 도시 이름이나 입력하세요. Open-Meteo의 첫 번째 결과를 사용합니다"
+        },
+        "visibleWhen": {
+          "key": "showWeather",
+          "value": true
+        }
+      },
+      "temperature": {
+        "type": "string",
+        "default": "celsius",
+        "label": "Temperature",
+        "labels": {
+          "it": "Temperatura",
+          "fr": "Température",
+          "de": "Temperatur",
+          "es": "Temperatura",
+          "pt-BR": "Temperatura",
+          "zh": "温度",
+          "ru": "Температура",
+          "ja": "気温",
+          "ko": "온도"
+        },
+        "options": [
+          {
+            "value": "celsius",
+            "label": "Celsius (°C)",
+            "labels": {
+              "it": "Celsius (°C)",
+              "fr": "Celsius (°C)",
+              "de": "Celsius (°C)",
+              "es": "Celsius (°C)",
+              "pt-BR": "Celsius (°C)",
+              "zh": "摄氏度 (°C)",
+              "ru": "Цельсий (°C)",
+              "ja": "摂氏 (°C)",
+              "ko": "섭씨(°C)"
+            }
+          },
+          {
+            "value": "fahrenheit",
+            "label": "Fahrenheit (°F)",
+            "labels": {
+              "it": "Fahrenheit (°F)",
+              "fr": "Fahrenheit (°F)",
+              "de": "Fahrenheit (°F)",
+              "es": "Fahrenheit (°F)",
+              "pt-BR": "Fahrenheit (°F)",
+              "zh": "华氏度 (°F)",
+              "ru": "Фаренгейт (°F)",
+              "ja": "華氏 (°F)",
+              "ko": "화씨(°F)"
+            }
+          }
+        ],
+        "visibleWhen": {
+          "key": "showWeather",
+          "value": true
+        }
+      }
+    }
+  },
+  {
+    "title": "Options",
+    "titles": {
+      "it": "Opzioni",
+      "fr": "Options",
+      "de": "Optionen",
+      "es": "Opciones",
+      "pt-BR": "Opções",
+      "zh": "选项",
+      "ru": "Параметры",
+      "ja": "オプション",
+      "ko": "옵션"
+    },
+    "settings": {
+      "hourFormat": {
+        "type": "string",
+        "default": "auto",
+        "label": "Time format",
+        "labels": {
+          "it": "Formato dell’ora",
+          "fr": "Format de l’heure",
+          "de": "Zeitformat",
+          "es": "Formato de hora",
+          "pt-BR": "Formato de hora",
+          "zh": "时间格式",
+          "ru": "Формат времени",
+          "ja": "時刻の形式",
+          "ko": "시간 형식"
+        },
+        "options": [
+          {
+            "value": "auto",
+            "label": "Follow Windows",
+            "labels": {
+              "it": "Segui Windows",
+              "fr": "Comme Windows",
+              "de": "Wie in Windows",
+              "es": "Seguir Windows",
+              "pt-BR": "Seguir o Windows",
+              "zh": "跟随 Windows",
+              "ru": "Как в Windows",
+              "ja": "Windows に合わせる",
+              "ko": "Windows 설정 따르기"
+            }
+          },
+          {
+            "value": "12",
+            "label": "12-hour",
+            "labels": {
+              "it": "12 ore",
+              "fr": "12 heures",
+              "de": "12 Stunden",
+              "es": "12 horas",
+              "pt-BR": "12 horas",
+              "zh": "12 小时制",
+              "ru": "12-часовой",
+              "ja": "12 時間制",
+              "ko": "12시간제"
+            }
+          },
+          {
+            "value": "24",
+            "label": "24-hour",
+            "labels": {
+              "it": "24 ore",
+              "fr": "24 heures",
+              "de": "24 Stunden",
+              "es": "24 horas",
+              "pt-BR": "24 horas",
+              "zh": "24 小时制",
+              "ru": "24-часовой",
+              "ja": "24 時間制",
+              "ko": "24시간제"
+            }
+          }
+        ]
+      },
+      "units": {
+        "type": "string",
+        "default": "bits",
+        "label": "Units",
+        "labels": {
+          "it": "Unità di misura",
+          "fr": "Unités",
+          "de": "Einheiten",
+          "es": "Unidades",
+          "pt-BR": "Unidades",
+          "zh": "单位",
+          "ru": "Единицы",
+          "ja": "単位",
+          "ko": "단위"
+        },
+        "options": [
+          {
+            "value": "bits",
+            "label": "Bits per second (Mbps)",
+            "labels": {
+              "it": "Bit al secondo (Mbps)",
+              "fr": "Bits par seconde (Mbps)",
+              "de": "Bit pro Sekunde (Mbps)",
+              "es": "Bits por segundo (Mbps)",
+              "pt-BR": "Bits por segundo (Mbps)",
+              "zh": "每秒比特数 (Mbps)",
+              "ru": "Биты в секунду (Mbps)",
+              "ja": "ビット/秒 (Mbps)",
+              "ko": "초당 비트(Mbps)"
+            }
+          },
+          {
+            "value": "bytes",
+            "label": "Bytes per second (MB/s)",
+            "labels": {
+              "it": "Byte al secondo (MB/s)",
+              "fr": "Octets par seconde (MB/s)",
+              "de": "Byte pro Sekunde (MB/s)",
+              "es": "Bytes por segundo (MB/s)",
+              "pt-BR": "Bytes por segundo (MB/s)",
+              "zh": "每秒字节数 (MB/s)",
+              "ru": "Байты в секунду (MB/s)",
+              "ja": "バイト/秒 (MB/s)",
+              "ko": "초당 바이트(MB/s)"
+            }
+          }
+        ]
+      },
+      "interval": {
+        "type": "number",
+        "default": 2,
+        "label": "Refresh every (seconds)",
+        "labels": {
+          "it": "Aggiorna ogni (secondi)",
+          "fr": "Actualiser toutes les (secondes)",
+          "de": "Aktualisieren alle (Sekunden)",
+          "es": "Actualizar cada (segundos)",
+          "pt-BR": "Atualizar a cada (segundos)",
+          "zh": "刷新间隔（秒）",
+          "ru": "Обновлять каждые (с)",
+          "ja": "更新間隔 (秒)",
+          "ko": "새로 고침 간격(초)"
+        },
+        "min": 1,
+        "max": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "title": "Appearance",
+    "titles": {
+      "it": "Aspetto",
+      "fr": "Apparence",
+      "de": "Darstellung",
+      "es": "Apariencia",
+      "pt-BR": "Aparência",
+      "zh": "外观",
+      "ru": "Оформление",
+      "ja": "外観",
+      "ko": "모양"
+    },
+    "settings": {
+      "background": {
+        "type": "string",
+        "default": "card",
+        "label": "Background",
+        "labels": {
+          "it": "Sfondo",
+          "fr": "Arrière-plan",
+          "de": "Hintergrund",
+          "es": "Fondo",
+          "pt-BR": "Fundo",
+          "zh": "背景",
+          "ru": "Фон",
+          "ja": "背景",
+          "ko": "배경"
+        },
+        "options": [
+          {
+            "value": "card",
+            "label": "Acrylic card",
+            "labels": {
+              "it": "Scheda acrilica",
+              "fr": "Carte acrylique",
+              "de": "Acrylkarte",
+              "es": "Tarjeta acrílica",
+              "pt-BR": "Cartão acrílico",
+              "zh": "亚克力卡片",
+              "ru": "Акриловая карточка",
+              "ja": "アクリル カード",
+              "ko": "아크릴 카드"
+            }
+          },
+          {
+            "value": "none",
+            "label": "None",
+            "labels": {
+              "it": "Nessuno",
+              "fr": "Aucun",
+              "de": "Keiner",
+              "es": "Ninguno",
+              "pt-BR": "Nenhum",
+              "zh": "无",
+              "ru": "Нет",
+              "ja": "なし",
+              "ko": "없음"
+            }
+          }
+        ]
+      },
+      "theme": {
+        "type": "string",
+        "default": "auto",
+        "label": "Theme",
+        "labels": {
+          "it": "Tema",
+          "fr": "Thème",
+          "de": "Design",
+          "es": "Tema",
+          "pt-BR": "Tema",
+          "zh": "主题",
+          "ru": "Тема",
+          "ja": "テーマ",
+          "ko": "테마"
+        },
+        "description": "System follows Windows light or dark mode",
+        "descriptions": {
+          "it": "Sistema segue la modalità chiara o scura di Windows",
+          "fr": "Système suit le mode clair ou sombre de Windows",
+          "de": "System folgt dem hellen oder dunklen Modus von Windows",
+          "es": "Sistema sigue el modo claro u oscuro de Windows",
+          "pt-BR": "Sistema segue o modo claro ou escuro do Windows",
+          "zh": "“系统”跟随 Windows 的浅色或深色模式",
+          "ru": "«Системная» следует светлому или тёмному режиму Windows",
+          "ja": "「システム」は Windows のライト/ダーク モードに従います",
+          "ko": "'시스템'은 Windows의 밝게/어둡게 모드를 따릅니다"
+        },
+        "options": [
+          {
+            "value": "auto",
+            "label": "System",
+            "labels": {
+              "it": "Sistema",
+              "fr": "Système",
+              "de": "System",
+              "es": "Sistema",
+              "pt-BR": "Sistema",
+              "zh": "系统",
+              "ru": "Системная",
+              "ja": "システム",
+              "ko": "시스템"
+            }
+          },
+          {
+            "value": "light",
+            "label": "Light",
+            "labels": {
+              "it": "Chiaro",
+              "fr": "Clair",
+              "de": "Hell",
+              "es": "Claro",
+              "pt-BR": "Claro",
+              "zh": "浅色",
+              "ru": "Светлая",
+              "ja": "ライト",
+              "ko": "밝게"
+            }
+          },
+          {
+            "value": "dark",
+            "label": "Dark",
+            "labels": {
+              "it": "Scuro",
+              "fr": "Sombre",
+              "de": "Dunkel",
+              "es": "Oscuro",
+              "pt-BR": "Escuro",
+              "zh": "深色",
+              "ru": "Тёмная",
+              "ja": "ダーク",
+              "ko": "어둡게"
+            }
+          }
+        ]
+      },
+      "accent": {
+        "type": "string",
+        "default": "system",
+        "label": "Accent color",
+        "labels": {
+          "it": "Colore d’accento",
+          "fr": "Couleur d’accentuation",
+          "de": "Akzentfarbe",
+          "es": "Color de énfasis",
+          "pt-BR": "Cor de destaque",
+          "zh": "强调色",
+          "ru": "Цвет акцента",
+          "ja": "アクセントカラー",
+          "ko": "강조 색"
+        },
+        "description": "system uses the Windows accent color, or enter a hex color",
+        "descriptions": {
+          "it": "system usa il colore d’accento di Windows, oppure inserisci un colore esadecimale",
+          "fr": "system utilise la couleur d’accentuation de Windows, ou saisissez une couleur hexadécimale",
+          "de": "system verwendet die Akzentfarbe von Windows, oder gib eine Hex-Farbe ein",
+          "es": "system usa el color de énfasis de Windows, o escribe un color hexadecimal",
+          "pt-BR": "system usa a cor de destaque do Windows, ou digite uma cor hexadecimal",
+          "zh": "填 system 使用 Windows 强调色，也可输入十六进制颜色",
+          "ru": "system — цвет акцента Windows, или укажите HEX-цвет",
+          "ja": "system で Windows のアクセントカラーを使います。16 進カラーも入力できます",
+          "ko": "system을 입력하면 Windows 강조 색을 사용합니다. 16진수 색도 입력할 수 있습니다"
+        },
+        "pattern": "^(system|#[0-9a-fA-F]{6})$",
+        "patternMessage": "Use system or a hex color such as #60CDFF",
+        "patternMessages": {
+          "it": "Usa system o un colore esadecimale come #60CDFF",
+          "fr": "Utilisez system ou une couleur hexadécimale comme #60CDFF",
+          "de": "Verwende system oder eine Hex-Farbe wie #60CDFF",
+          "es": "Usa system o un color hexadecimal como #60CDFF",
+          "pt-BR": "Use system ou uma cor hexadecimal como #60CDFF",
+          "zh": "请填 system 或十六进制颜色，例如 #60CDFF",
+          "ru": "Укажите system или HEX-цвет, например #60CDFF",
+          "ja": "system または #60CDFF のような 16 進カラーを入力してください",
+          "ko": "system 또는 #60CDFF 같은 16진수 색을 입력하세요"
+        }
+      }
+    }
+  }
+]

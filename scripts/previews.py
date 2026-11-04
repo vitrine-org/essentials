@@ -5,7 +5,8 @@
 #
 # Essentials widgets are acrylic cards. They render over a solid #2a2a2a backdrop, so the glass
 # becomes a flat, even card, and are cut to the card's rounded shape on a transparent
-# background. Every widget uses the dark theme, the same accent and its default size from
+# background, just inside the 1 px hairline edge: no light rim, drop shadow or glow around the
+# card, which would read as a halo on the store's dark tiles. Every widget uses the dark theme, the same accent and its default size from
 # vitrine.json, at scale 2, with realistic sample content where the default is empty. Weather
 # renders with live data from Open-Meteo.
 
@@ -14,8 +15,10 @@ EXTRA = {
     "todo": {"items": "Book flights to Lisbon;[x] Renew passport;Call the dentist;[x] Water the plants;Send the March invoice"},
     "notes": {"text": "Pick up the cake at 6, Giulia’s party starts at 8"},
     "countdown": {"title": "Christmas", "date": "2026-12-25"},
+    "conky": {"showWeather": True},
 }
 CARD_RADIUS = 12  # RADIUS in src/shared/ui.tsx
+CARD_EDGE = 1.5  # the hairline border and the 1 px top highlight under it, cut away
 BACKDROP = "#2a2a2a"
 
 
@@ -36,11 +39,12 @@ def find_exe(arg):
     sys.exit("vitrine.exe not found: pass --exe or set VITRINE_EXE")
 
 
-def rounded_mask(size, radius):
-    # 4x supersampled rounded rectangle, for smooth corners.
+def rounded_mask(size, radius, inset=0):
+    # 4x supersampled rounded rectangle, `inset` px inside the edges, for smooth corners.
     k = 4
     m = Image.new("L", (size[0] * k, size[1] * k), 0)
-    ImageDraw.Draw(m).rounded_rectangle((0, 0, size[0] * k - 1, size[1] * k - 1), radius=radius * k, fill=255)
+    i = inset * k
+    ImageDraw.Draw(m).rounded_rectangle((i, i, size[0] * k - 1 - i, size[1] * k - 1 - i), radius=max(0, radius - inset) * k, fill=255)
     return m.resize(size, Image.LANCZOS)
 
 
@@ -82,7 +86,7 @@ def main():
             continue
         img = Image.open(raw).convert("RGBA")
         if CARD_RADIUS:
-            alpha = Image.composite(img.getchannel("A"), Image.new("L", img.size, 0), rounded_mask(img.size, CARD_RADIUS * SCALE))
+            alpha = Image.composite(img.getchannel("A"), Image.new("L", img.size, 0), rounded_mask(img.size, CARD_RADIUS * SCALE, CARD_EDGE * SCALE))
             img.putalpha(alpha)
         out = os.path.join(ROOT, w["preview"])
         img.save(out, optimize=True)

@@ -1,42 +1,7 @@
 import { createEffect, createSignal, For, on, onCleanup } from "solid-js";
-import { formatDate, localeInfo, mount, useSettings, useSize, useStorage } from "@vitrine/sdk";
+import { formatDate, mount, useSettings, useSize, useStorage } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, type Palette, Txt, shadeOf, usePalette, uses12h } from "../shared/ui";
-
-const REFRESH_MS = 30 * 60 * 1000;
-
-interface Day {
-  date: string;
-  code: number;
-  max: number;
-  min: number;
-}
-interface Cache {
-  query: string;
-  units: string;
-  place: string;
-  lat: number;
-  lon: number;
-  fetchedAt: number;
-  current: { temp: number; code: number; isDay: boolean };
-  today: Day;
-  days: Day[];
-}
-
-type Kind = "sun" | "moon" | "partly" | "partly-night" | "cloud" | "fog" | "drizzle" | "rain" | "snow" | "storm";
-
-/** WMO weather code → icon kind and label. */
-function describe(code: number, day = true): [Kind, string] {
-  if (code === 0) return [day ? "sun" : "moon", day ? "Sunny" : "Clear"];
-  if (code === 1) return [day ? "sun" : "moon", "Mostly clear"];
-  if (code === 2) return [day ? "partly" : "partly-night", "Partly cloudy"];
-  if (code === 3) return ["cloud", "Cloudy"];
-  if (code === 45 || code === 48) return ["fog", "Fog"];
-  if (code >= 51 && code <= 57) return ["drizzle", "Drizzle"];
-  if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return ["rain", code >= 80 ? "Showers" : code >= 65 ? "Heavy rain" : "Rain"];
-  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return ["snow", "Snow"];
-  if (code >= 95) return ["storm", "Thunderstorm"];
-  return ["cloud", "Cloudy"];
-}
+import { type Cache, type Kind, REFRESH_MS, describe, load } from "../shared/meteo";
 
 const SUN = "#FFC83D";
 const CLOUD = "M 7.2 19 L 17 19 C 19.8 19 21.6 17.1 21.6 14.8 C 21.6 12.6 19.9 10.8 17.7 10.7 C 17 8.1 14.7 6.4 12.1 6.4 C 9 6.4 6.6 8.7 6.3 11.6 C 4.2 11.9 2.6 13.6 2.6 15.4 C 2.6 17.4 4.5 19 7.2 19 Z";
@@ -126,47 +91,6 @@ function OfflineIcon(props: { p: Palette }) {
       <path d="M 3 3.5 L 21 21.5" stroke={props.p.text3} strokeWidth={1.4} strokeLinecap="round" />
     </svg>
   );
-}
-
-const day = (d: Day): Day => ({ date: d.date, code: d.code, max: Math.round(d.max), min: Math.round(d.min) });
-
-async function load(query: string, units: string, prev: Cache | null): Promise<Cache> {
-  let place = prev?.place ?? "";
-  let lat = prev?.lat ?? 0;
-  let lon = prev?.lon ?? 0;
-  if (!prev || prev.query !== query) {
-    const g = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=1&language=${localeInfo().locale.slice(0, 2) || "en"}&format=json`,
-    );
-    if (!g.ok) throw new Error(`geocoding ${g.status}`);
-    const hit = (await g.json()).results?.[0];
-    if (!hit) throw new Error("notfound");
-    place = hit.name;
-    lat = hit.latitude;
-    lon = hit.longitude;
-  }
-  const r = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
-      `&current=temperature_2m,weather_code,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min` +
-      `&timezone=auto&forecast_days=4&temperature_unit=${units === "fahrenheit" ? "fahrenheit" : "celsius"}`,
-  );
-  if (!r.ok) throw new Error(`forecast ${r.status}`);
-  const j = await r.json();
-  const d = j.daily;
-  const days: Day[] = d.time.map((date: string, i: number) =>
-    day({ date, code: d.weather_code[i], max: d.temperature_2m_max[i], min: d.temperature_2m_min[i] }),
-  );
-  return {
-    query,
-    units,
-    place,
-    lat,
-    lon,
-    fetchedAt: Date.now(),
-    current: { temp: Math.round(j.current.temperature_2m), code: j.current.weather_code, isDay: !!j.current.is_day },
-    today: days[0],
-    days: days.slice(1, 4),
-  };
 }
 
 function Weather() {

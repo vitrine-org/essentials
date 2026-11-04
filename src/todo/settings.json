@@ -1,40 +1,139 @@
 [
   {
     "title": "To Do",
+    "titles": {
+      "it": "Attività",
+      "fr": "À faire",
+      "de": "Aufgaben",
+      "es": "Tareas",
+      "pt-BR": "Tarefas",
+      "zh": "待办事项",
+      "ru": "Задачи",
+      "ja": "タスク",
+      "ko": "할 일"
+    },
     "settings": {
       "title": {
         "type": "string",
         "default": "To Do",
-        "label": "Title"
+        "label": "Title",
+        "labels": {
+          "it": "Titolo",
+          "fr": "Titre",
+          "de": "Titel",
+          "es": "Título",
+          "pt-BR": "Título",
+          "zh": "标题",
+          "ru": "Название",
+          "ja": "タイトル",
+          "ko": "제목"
+        }
       },
       "items": {
         "type": "string",
         "default": "",
         "label": "Add tasks",
-        "description": "Separate tasks with ; (each is added once and then kept in the widget)"
+        "labels": {
+          "it": "Aggiungi attività",
+          "fr": "Ajouter des tâches",
+          "de": "Aufgaben hinzufügen",
+          "es": "Añadir tareas",
+          "pt-BR": "Adicionar tarefas",
+          "zh": "添加任务",
+          "ru": "Добавить задачи",
+          "ja": "タスクを追加",
+          "ko": "작업 추가"
+        },
+        "description": "Separate tasks with ; (each is added once and then kept in the widget)",
+        "descriptions": {
+          "it": "Separa le attività con ; (ognuna viene aggiunta una volta e poi resta nel widget)",
+          "fr": "Séparez les tâches par ; (chacune est ajoutée une fois puis conservée dans le widget)",
+          "de": "Aufgaben mit ; trennen (jede wird einmal hinzugefügt und dann im Widget behalten)",
+          "es": "Separa las tareas con ; (cada una se añade una vez y luego se queda en el widget)",
+          "pt-BR": "Separe as tarefas com ; (cada uma é adicionada uma vez e depois mantida no widget)",
+          "zh": "用 ; 分隔任务（每项只添加一次，之后保留在小组件中）",
+          "ru": "Разделяйте задачи символом ; (каждая добавляется один раз и затем хранится в виджете)",
+          "ja": "タスクは ; で区切ります (各タスクは 1 回だけ追加され、その後はウィジェットに残ります)",
+          "ko": "작업은 ;로 구분합니다(각 작업은 한 번 추가된 후 위젯에 유지됩니다)"
+        }
       },
       "hideDone": {
         "type": "boolean",
         "default": false,
-        "label": "Hide completed tasks"
+        "label": "Hide completed tasks",
+        "labels": {
+          "it": "Nascondi le attività completate",
+          "fr": "Masquer les tâches terminées",
+          "de": "Erledigte Aufgaben ausblenden",
+          "es": "Ocultar las tareas completadas",
+          "pt-BR": "Ocultar tarefas concluídas",
+          "zh": "隐藏已完成的任务",
+          "ru": "Скрывать выполненные задачи",
+          "ja": "完了したタスクを非表示",
+          "ko": "완료된 작업 숨기기"
+        }
       }
     }
   },
   {
     "title": "Appearance",
+    "titles": {
+      "it": "Aspetto",
+      "fr": "Apparence",
+      "de": "Darstellung",
+      "es": "Apariencia",
+      "pt-BR": "Aparência",
+      "zh": "外观",
+      "ru": "Оформление",
+      "ja": "外観",
+      "ko": "모양"
+    },
     "settings": {
       "background": {
         "type": "string",
         "default": "card",
         "label": "Background",
+        "labels": {
+          "it": "Sfondo",
+          "fr": "Arrière-plan",
+          "de": "Hintergrund",
+          "es": "Fondo",
+          "pt-BR": "Fundo",
+          "zh": "背景",
+          "ru": "Фон",
+          "ja": "背景",
+          "ko": "배경"
+        },
         "options": [
           {
             "value": "card",
-            "label": "Acrylic card"
+            "label": "Acrylic card",
+            "labels": {
+              "it": "Scheda acrilica",
+              "fr": "Carte acrylique",
+              "de": "Acrylkarte",
+              "es": "Tarjeta acrílica",
+              "pt-BR": "Cartão acrílico",
+              "zh": "亚克力卡片",
+              "ru": "Акриловая карточка",
+              "ja": "アクリル カード",
+              "ko": "아크릴 카드"
+            }
           },
           {
             "value": "none",
-            "label": "None"
+            "label": "None",
+            "labels": {
+              "it": "Nessuno",
+              "fr": "Aucun",
+              "de": "Keiner",
+              "es": "Ninguno",
+              "pt-BR": "Nenhum",
+              "zh": "无",
+              "ru": "Нет",
+              "ja": "なし",
+              "ko": "없음"
+            }
           }
         ]
       },
@@ -42,19 +141,74 @@
         "type": "string",
         "default": "auto",
         "label": "Theme",
+        "labels": {
+          "it": "Tema",
+          "fr": "Thème",
+          "de": "Design",
+          "es": "Tema",
+          "pt-BR": "Tema",
+          "zh": "主题",
+          "ru": "Тема",
+          "ja": "テーマ",
+          "ko": "테마"
+        },
         "description": "System follows Windows light or dark mode",
+        "descriptions": {
+          "it": "Sistema segue la modalità chiara o scura di Windows",
+          "fr": "Système suit le mode clair ou sombre de Windows",
+          "de": "System folgt dem hellen oder dunklen Modus von Windows",
+          "es": "Sistema sigue el modo claro u oscuro de Windows",
+          "pt-BR": "Sistema segue o modo claro ou escuro do Windows",
+          "zh": "“系统”跟随 Windows 的浅色或深色模式",
+          "ru": "«Системная» следует светлому или тёмному режиму Windows",
+          "ja": "「システム」は Windows のライト/ダーク モードに従います",
+          "ko": "'시스템'은 Windows의 밝게/어둡게 모드를 따릅니다"
+        },
         "options": [
           {
             "value": "auto",
-            "label": "System"
+            "label": "System",
+            "labels": {
+              "it": "Sistema",
+              "fr": "Système",
+              "de": "System",
+              "es": "Sistema",
+              "pt-BR": "Sistema",
+              "zh": "系统",
+              "ru": "Системная",
+              "ja": "システム",
+              "ko": "시스템"
+            }
           },
           {
             "value": "light",
-            "label": "Light"
+            "label": "Light",
+            "labels": {
+              "it": "Chiaro",
+              "fr": "Clair",
+              "de": "Hell",
+              "es": "Claro",
+              "pt-BR": "Claro",
+              "zh": "浅色",
+              "ru": "Светлая",
+              "ja": "ライト",
+              "ko": "밝게"
+            }
           },
           {
             "value": "dark",
-            "label": "Dark"
+            "label": "Dark",
+            "labels": {
+              "it": "Scuro",
+              "fr": "Sombre",
+              "de": "Dunkel",
+              "es": "Oscuro",
+              "pt-BR": "Escuro",
+              "zh": "深色",
+              "ru": "Тёмная",
+              "ja": "ダーク",
+              "ko": "어둡게"
+            }
           }
         ]
       },
@@ -62,9 +216,42 @@
         "type": "string",
         "default": "system",
         "label": "Accent color",
+        "labels": {
+          "it": "Colore d’accento",
+          "fr": "Couleur d’accentuation",
+          "de": "Akzentfarbe",
+          "es": "Color de énfasis",
+          "pt-BR": "Cor de destaque",
+          "zh": "强调色",
+          "ru": "Цвет акцента",
+          "ja": "アクセントカラー",
+          "ko": "강조 색"
+        },
         "description": "system uses the Windows accent color, or enter a hex color",
+        "descriptions": {
+          "it": "system usa il colore d’accento di Windows, oppure inserisci un colore esadecimale",
+          "fr": "system utilise la couleur d’accentuation de Windows, ou saisissez une couleur hexadécimale",
+          "de": "system verwendet die Akzentfarbe von Windows, oder gib eine Hex-Farbe ein",
+          "es": "system usa el color de énfasis de Windows, o escribe un color hexadecimal",
+          "pt-BR": "system usa a cor de destaque do Windows, ou digite uma cor hexadecimal",
+          "zh": "填 system 使用 Windows 强调色，也可输入十六进制颜色",
+          "ru": "system — цвет акцента Windows, или укажите HEX-цвет",
+          "ja": "system で Windows のアクセントカラーを使います。16 進カラーも入力できます",
+          "ko": "system을 입력하면 Windows 강조 색을 사용합니다. 16진수 색도 입력할 수 있습니다"
+        },
         "pattern": "^(system|#[0-9a-fA-F]{6})$",
-        "patternMessage": "Use system or a hex color such as #60CDFF"
+        "patternMessage": "Use system or a hex color such as #60CDFF",
+        "patternMessages": {
+          "it": "Usa system o un colore esadecimale come #60CDFF",
+          "fr": "Utilisez system ou une couleur hexadécimale comme #60CDFF",
+          "de": "Verwende system oder eine Hex-Farbe wie #60CDFF",
+          "es": "Usa system o un color hexadecimal como #60CDFF",
+          "pt-BR": "Use system ou uma cor hexadecimal como #60CDFF",
+          "zh": "请填 system 或十六进制颜色，例如 #60CDFF",
+          "ru": "Укажите system или HEX-цвет, например #60CDFF",
+          "ja": "system または #60CDFF のような 16 進カラーを入力してください",
+          "ko": "system 또는 #60CDFF 같은 16진수 색을 입력하세요"
+        }
       }
     }
   }

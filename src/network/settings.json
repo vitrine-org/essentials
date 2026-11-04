@@ -1,17 +1,265 @@
 [
   {
     "title": "Network",
+    "titles": {
+      "it": "Rete",
+      "fr": "Réseau",
+      "de": "Netzwerk",
+      "es": "Red",
+      "pt-BR": "Rede",
+      "zh": "网络",
+      "ru": "Сеть",
+      "ja": "ネットワーク",
+      "ko": "네트워크"
+    },
     "settings": {
-      "units": { "type": "string", "default": "bits", "label": "Units", "options": [ { "value": "bits", "label": "Bits per second (Mbps)" }, { "value": "bytes", "label": "Bytes per second (MB/s)" } ] },
-      "interval": { "type": "number", "default": 1, "label": "Refresh every (seconds)", "min": 1, "max": 10, "step": 1 }
+      "units": {
+        "type": "string",
+        "default": "bits",
+        "label": "Units",
+        "labels": {
+          "it": "Unità di misura",
+          "fr": "Unités",
+          "de": "Einheiten",
+          "es": "Unidades",
+          "pt-BR": "Unidades",
+          "zh": "单位",
+          "ru": "Единицы",
+          "ja": "単位",
+          "ko": "단위"
+        },
+        "options": [
+          {
+            "value": "bits",
+            "label": "Bits per second (Mbps)",
+            "labels": {
+              "it": "Bit al secondo (Mbps)",
+              "fr": "Bits par seconde (Mbps)",
+              "de": "Bit pro Sekunde (Mbps)",
+              "es": "Bits por segundo (Mbps)",
+              "pt-BR": "Bits por segundo (Mbps)",
+              "zh": "每秒比特数 (Mbps)",
+              "ru": "Биты в секунду (Mbps)",
+              "ja": "ビット/秒 (Mbps)",
+              "ko": "초당 비트(Mbps)"
+            }
+          },
+          {
+            "value": "bytes",
+            "label": "Bytes per second (MB/s)",
+            "labels": {
+              "it": "Byte al secondo (MB/s)",
+              "fr": "Octets par seconde (MB/s)",
+              "de": "Byte pro Sekunde (MB/s)",
+              "es": "Bytes por segundo (MB/s)",
+              "pt-BR": "Bytes por segundo (MB/s)",
+              "zh": "每秒字节数 (MB/s)",
+              "ru": "Байты в секунду (MB/s)",
+              "ja": "バイト/秒 (MB/s)",
+              "ko": "초당 바이트(MB/s)"
+            }
+          }
+        ]
+      },
+      "interval": {
+        "type": "number",
+        "default": 1,
+        "label": "Refresh every (seconds)",
+        "labels": {
+          "it": "Aggiorna ogni (secondi)",
+          "fr": "Actualiser toutes les (secondes)",
+          "de": "Aktualisieren alle (Sekunden)",
+          "es": "Actualizar cada (segundos)",
+          "pt-BR": "Atualizar a cada (segundos)",
+          "zh": "刷新间隔（秒）",
+          "ru": "Обновлять каждые (с)",
+          "ja": "更新間隔 (秒)",
+          "ko": "새로 고침 간격(초)"
+        },
+        "min": 1,
+        "max": 10,
+        "step": 1
+      }
     }
   },
   {
     "title": "Appearance",
+    "titles": {
+      "it": "Aspetto",
+      "fr": "Apparence",
+      "de": "Darstellung",
+      "es": "Apariencia",
+      "pt-BR": "Aparência",
+      "zh": "外观",
+      "ru": "Оформление",
+      "ja": "外観",
+      "ko": "모양"
+    },
     "settings": {
-      "background": { "type": "string", "default": "card", "label": "Background", "options": [ { "value": "card", "label": "Acrylic card" }, { "value": "none", "label": "None" } ] },
-      "theme": { "type": "string", "default": "auto", "label": "Theme", "description": "System follows Windows light or dark mode", "options": [ { "value": "auto", "label": "System" }, { "value": "light", "label": "Light" }, { "value": "dark", "label": "Dark" } ] },
-      "accent": { "type": "string", "default": "system", "label": "Accent color", "description": "system uses the Windows accent color, or enter a hex color", "pattern": "^(system|#[0-9a-fA-F]{6})$", "patternMessage": "Use system or a hex color such as #60CDFF" }
+      "background": {
+        "type": "string",
+        "default": "card",
+        "label": "Background",
+        "labels": {
+          "it": "Sfondo",
+          "fr": "Arrière-plan",
+          "de": "Hintergrund",
+          "es": "Fondo",
+          "pt-BR": "Fundo",
+          "zh": "背景",
+          "ru": "Фон",
+          "ja": "背景",
+          "ko": "배경"
+        },
+        "options": [
+          {
+            "value": "card",
+            "label": "Acrylic card",
+            "labels": {
+              "it": "Scheda acrilica",
+              "fr": "Carte acrylique",
+              "de": "Acrylkarte",
+              "es": "Tarjeta acrílica",
+              "pt-BR": "Cartão acrílico",
+              "zh": "亚克力卡片",
+              "ru": "Акриловая карточка",
+              "ja": "アクリル カード",
+              "ko": "아크릴 카드"
+            }
+          },
+          {
+            "value": "none",
+            "label": "None",
+            "labels": {
+              "it": "Nessuno",
+              "fr": "Aucun",
+              "de": "Keiner",
+              "es": "Ninguno",
+              "pt-BR": "Nenhum",
+              "zh": "无",
+              "ru": "Нет",
+              "ja": "なし",
+              "ko": "없음"
+            }
+          }
+        ]
+      },
+      "theme": {
+        "type": "string",
+        "default": "auto",
+        "label": "Theme",
+        "labels": {
+          "it": "Tema",
+          "fr": "Thème",
+          "de": "Design",
+          "es": "Tema",
+          "pt-BR": "Tema",
+          "zh": "主题",
+          "ru": "Тема",
+          "ja": "テーマ",
+          "ko": "테마"
+        },
+        "description": "System follows Windows light or dark mode",
+        "descriptions": {
+          "it": "Sistema segue la modalità chiara o scura di Windows",
+          "fr": "Système suit le mode clair ou sombre de Windows",
+          "de": "System folgt dem hellen oder dunklen Modus von Windows",
+          "es": "Sistema sigue el modo claro u oscuro de Windows",
+          "pt-BR": "Sistema segue o modo claro ou escuro do Windows",
+          "zh": "“系统”跟随 Windows 的浅色或深色模式",
+          "ru": "«Системная» следует светлому или тёмному режиму Windows",
+          "ja": "「システム」は Windows のライト/ダーク モードに従います",
+          "ko": "'시스템'은 Windows의 밝게/어둡게 모드를 따릅니다"
+        },
+        "options": [
+          {
+            "value": "auto",
+            "label": "System",
+            "labels": {
+              "it": "Sistema",
+              "fr": "Système",
+              "de": "System",
+              "es": "Sistema",
+              "pt-BR": "Sistema",
+              "zh": "系统",
+              "ru": "Системная",
+              "ja": "システム",
+              "ko": "시스템"
+            }
+          },
+          {
+            "value": "light",
+            "label": "Light",
+            "labels": {
+              "it": "Chiaro",
+              "fr": "Clair",
+              "de": "Hell",
+              "es": "Claro",
+              "pt-BR": "Claro",
+              "zh": "浅色",
+              "ru": "Светлая",
+              "ja": "ライト",
+              "ko": "밝게"
+            }
+          },
+          {
+            "value": "dark",
+            "label": "Dark",
+            "labels": {
+              "it": "Scuro",
+              "fr": "Sombre",
+              "de": "Dunkel",
+              "es": "Oscuro",
+              "pt-BR": "Escuro",
+              "zh": "深色",
+              "ru": "Тёмная",
+              "ja": "ダーク",
+              "ko": "어둡게"
+            }
+          }
+        ]
+      },
+      "accent": {
+        "type": "string",
+        "default": "system",
+        "label": "Accent color",
+        "labels": {
+          "it": "Colore d’accento",
+          "fr": "Couleur d’accentuation",
+          "de": "Akzentfarbe",
+          "es": "Color de énfasis",
+          "pt-BR": "Cor de destaque",
+          "zh": "强调色",
+          "ru": "Цвет акцента",
+          "ja": "アクセントカラー",
+          "ko": "강조 색"
+        },
+        "description": "system uses the Windows accent color, or enter a hex color",
+        "descriptions": {
+          "it": "system usa il colore d’accento di Windows, oppure inserisci un colore esadecimale",
+          "fr": "system utilise la couleur d’accentuation de Windows, ou saisissez une couleur hexadécimale",
+          "de": "system verwendet die Akzentfarbe von Windows, oder gib eine Hex-Farbe ein",
+          "es": "system usa el color de énfasis de Windows, o escribe un color hexadecimal",
+          "pt-BR": "system usa a cor de destaque do Windows, ou digite uma cor hexadecimal",
+          "zh": "填 system 使用 Windows 强调色，也可输入十六进制颜色",
+          "ru": "system — цвет акцента Windows, или укажите HEX-цвет",
+          "ja": "system で Windows のアクセントカラーを使います。16 進カラーも入力できます",
+          "ko": "system을 입력하면 Windows 강조 색을 사용합니다. 16진수 색도 입력할 수 있습니다"
+        },
+        "pattern": "^(system|#[0-9a-fA-F]{6})$",
+        "patternMessage": "Use system or a hex color such as #60CDFF",
+        "patternMessages": {
+          "it": "Usa system o un colore esadecimale come #60CDFF",
+          "fr": "Utilisez system ou une couleur hexadécimale comme #60CDFF",
+          "de": "Verwende system oder eine Hex-Farbe wie #60CDFF",
+          "es": "Usa system o un color hexadecimal como #60CDFF",
+          "pt-BR": "Use system ou uma cor hexadecimal como #60CDFF",
+          "zh": "请填 system 或十六进制颜色，例如 #60CDFF",
+          "ru": "Укажите system или HEX-цвет, например #60CDFF",
+          "ja": "system または #60CDFF のような 16 進カラーを入力してください",
+          "ko": "system 또는 #60CDFF 같은 16진수 색을 입력하세요"
+        }
+      }
     }
   }
 ]

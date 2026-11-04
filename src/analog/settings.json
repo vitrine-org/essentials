@@ -1,53 +1,174 @@
 [
   {
     "title": "Clock",
+    "titles": {
+      "it": "Orologio",
+      "fr": "Horloge",
+      "de": "Uhr",
+      "es": "Reloj",
+      "pt-BR": "Relógio",
+      "zh": "时钟",
+      "ru": "Часы",
+      "ja": "時計",
+      "ko": "시계"
+    },
     "settings": {
       "face": {
         "type": "string",
         "default": "ticks",
         "label": "Dial",
+        "labels": {
+          "it": "Quadrante",
+          "fr": "Cadran",
+          "de": "Zifferblatt",
+          "es": "Esfera",
+          "pt-BR": "Mostrador",
+          "zh": "表盘",
+          "ru": "Циферблат",
+          "ja": "文字盤",
+          "ko": "다이얼"
+        },
         "options": [
           {
             "value": "ticks",
-            "label": "Minute ticks"
+            "label": "Minute ticks",
+            "labels": {
+              "it": "Tacche dei minuti",
+              "fr": "Graduations des minutes",
+              "de": "Minutenstriche",
+              "es": "Marcas de minutos",
+              "pt-BR": "Marcas de minutos",
+              "zh": "分钟刻度",
+              "ru": "Минутные деления",
+              "ja": "分目盛り",
+              "ko": "분 눈금"
+            }
           },
           {
             "value": "numbers",
-            "label": "Numerals"
+            "label": "Numerals",
+            "labels": {
+              "it": "Numeri",
+              "fr": "Chiffres",
+              "de": "Ziffern",
+              "es": "Números",
+              "pt-BR": "Números",
+              "zh": "数字",
+              "ru": "Цифры",
+              "ja": "数字",
+              "ko": "숫자"
+            }
           },
           {
             "value": "minimal",
-            "label": "Minimal"
+            "label": "Minimal",
+            "labels": {
+              "it": "Minimale",
+              "fr": "Minimal",
+              "de": "Minimal",
+              "es": "Mínimo",
+              "pt-BR": "Minimalista",
+              "zh": "极简",
+              "ru": "Минимальный",
+              "ja": "ミニマル",
+              "ko": "미니멀"
+            }
           }
         ]
       },
       "showSeconds": {
         "type": "boolean",
         "default": true,
-        "label": "Second hand"
+        "label": "Second hand",
+        "labels": {
+          "it": "Lancetta dei secondi",
+          "fr": "Trotteuse",
+          "de": "Sekundenzeiger",
+          "es": "Segundero",
+          "pt-BR": "Ponteiro dos segundos",
+          "zh": "秒针",
+          "ru": "Секундная стрелка",
+          "ja": "秒針",
+          "ko": "초침"
+        }
       },
       "showDate": {
         "type": "boolean",
         "default": true,
-        "label": "Show date"
+        "label": "Show date",
+        "labels": {
+          "it": "Mostra la data",
+          "fr": "Afficher la date",
+          "de": "Datum anzeigen",
+          "es": "Mostrar la fecha",
+          "pt-BR": "Mostrar a data",
+          "zh": "显示日期",
+          "ru": "Показывать дату",
+          "ja": "日付を表示",
+          "ko": "날짜 표시"
+        }
       }
     }
   },
   {
     "title": "Appearance",
+    "titles": {
+      "it": "Aspetto",
+      "fr": "Apparence",
+      "de": "Darstellung",
+      "es": "Apariencia",
+      "pt-BR": "Aparência",
+      "zh": "外观",
+      "ru": "Оформление",
+      "ja": "外観",
+      "ko": "모양"
+    },
     "settings": {
       "background": {
         "type": "string",
         "default": "card",
         "label": "Background",
+        "labels": {
+          "it": "Sfondo",
+          "fr": "Arrière-plan",
+          "de": "Hintergrund",
+          "es": "Fondo",
+          "pt-BR": "Fundo",
+          "zh": "背景",
+          "ru": "Фон",
+          "ja": "背景",
+          "ko": "배경"
+        },
         "options": [
           {
             "value": "card",
-            "label": "Acrylic card"
+            "label": "Acrylic card",
+            "labels": {
+              "it": "Scheda acrilica",
+              "fr": "Carte acrylique",
+              "de": "Acrylkarte",
+              "es": "Tarjeta acrílica",
+              "pt-BR": "Cartão acrílico",
+              "zh": "亚克力卡片",
+              "ru": "Акриловая карточка",
+              "ja": "アクリル カード",
+              "ko": "아크릴 카드"
+            }
           },
           {
             "value": "none",
-            "label": "None"
+            "label": "None",
+            "labels": {
+              "it": "Nessuno",
+              "fr": "Aucun",
+              "de": "Keiner",
+              "es": "Ninguno",
+              "pt-BR": "Nenhum",
+              "zh": "无",
+              "ru": "Нет",
+              "ja": "なし",
+              "ko": "없음"
+            }
           }
         ]
       },
@@ -55,19 +176,74 @@
         "type": "string",
         "default": "auto",
         "label": "Theme",
+        "labels": {
+          "it": "Tema",
+          "fr": "Thème",
+          "de": "Design",
+          "es": "Tema",
+          "pt-BR": "Tema",
+          "zh": "主题",
+          "ru": "Тема",
+          "ja": "テーマ",
+          "ko": "테마"
+        },
         "description": "System follows Windows light or dark mode",
+        "descriptions": {
+          "it": "Sistema segue la modalità chiara o scura di Windows",
+          "fr": "Système suit le mode clair ou sombre de Windows",
+          "de": "System folgt dem hellen oder dunklen Modus von Windows",
+          "es": "Sistema sigue el modo claro u oscuro de Windows",
+          "pt-BR": "Sistema segue o modo claro ou escuro do Windows",
+          "zh": "“系统”跟随 Windows 的浅色或深色模式",
+          "ru": "«Системная» следует светлому или тёмному режиму Windows",
+          "ja": "「システム」は Windows のライト/ダーク モードに従います",
+          "ko": "'시스템'은 Windows의 밝게/어둡게 모드를 따릅니다"
+        },
         "options": [
           {
             "value": "auto",
-            "label": "System"
+            "label": "System",
+            "labels": {
+              "it": "Sistema",
+              "fr": "Système",
+              "de": "System",
+              "es": "Sistema",
+              "pt-BR": "Sistema",
+              "zh": "系统",
+              "ru": "Системная",
+              "ja": "システム",
+              "ko": "시스템"
+            }
           },
           {
             "value": "light",
-            "label": "Light"
+            "label": "Light",
+            "labels": {
+              "it": "Chiaro",
+              "fr": "Clair",
+              "de": "Hell",
+              "es": "Claro",
+              "pt-BR": "Claro",
+              "zh": "浅色",
+              "ru": "Светлая",
+              "ja": "ライト",
+              "ko": "밝게"
+            }
           },
           {
             "value": "dark",
-            "label": "Dark"
+            "label": "Dark",
+            "labels": {
+              "it": "Scuro",
+              "fr": "Sombre",
+              "de": "Dunkel",
+              "es": "Oscuro",
+              "pt-BR": "Escuro",
+              "zh": "深色",
+              "ru": "Тёмная",
+              "ja": "ダーク",
+              "ko": "어둡게"
+            }
           }
         ]
       },
@@ -75,9 +251,42 @@
         "type": "string",
         "default": "system",
         "label": "Accent color",
+        "labels": {
+          "it": "Colore d’accento",
+          "fr": "Couleur d’accentuation",
+          "de": "Akzentfarbe",
+          "es": "Color de énfasis",
+          "pt-BR": "Cor de destaque",
+          "zh": "强调色",
+          "ru": "Цвет акцента",
+          "ja": "アクセントカラー",
+          "ko": "강조 색"
+        },
         "description": "system uses the Windows accent color, or enter a hex color",
+        "descriptions": {
+          "it": "system usa il colore d’accento di Windows, oppure inserisci un colore esadecimale",
+          "fr": "system utilise la couleur d’accentuation de Windows, ou saisissez une couleur hexadécimale",
+          "de": "system verwendet die Akzentfarbe von Windows, oder gib eine Hex-Farbe ein",
+          "es": "system usa el color de énfasis de Windows, o escribe un color hexadecimal",
+          "pt-BR": "system usa a cor de destaque do Windows, ou digite uma cor hexadecimal",
+          "zh": "填 system 使用 Windows 强调色，也可输入十六进制颜色",
+          "ru": "system — цвет акцента Windows, или укажите HEX-цвет",
+          "ja": "system で Windows のアクセントカラーを使います。16 進カラーも入力できます",
+          "ko": "system을 입력하면 Windows 강조 색을 사용합니다. 16진수 색도 입력할 수 있습니다"
+        },
         "pattern": "^(system|#[0-9a-fA-F]{6})$",
-        "patternMessage": "Use system or a hex color such as #60CDFF"
+        "patternMessage": "Use system or a hex color such as #60CDFF",
+        "patternMessages": {
+          "it": "Usa system o un colore esadecimale come #60CDFF",
+          "fr": "Utilisez system ou une couleur hexadécimale comme #60CDFF",
+          "de": "Verwende system oder eine Hex-Farbe wie #60CDFF",
+          "es": "Usa system o un color hexadecimal como #60CDFF",
+          "pt-BR": "Use system ou uma cor hexadecimal como #60CDFF",
+          "zh": "请填 system 或十六进制颜色，例如 #60CDFF",
+          "ru": "Укажите system или HEX-цвет, например #60CDFF",
+          "ja": "system または #60CDFF のような 16 進カラーを入力してください",
+          "ko": "system 또는 #60CDFF 같은 16진수 색을 입력하세요"
+        }
       }
     }
   }

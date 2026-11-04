@@ -1,10 +1,11 @@
 {
   "id": "dev.vitrine.essentials",
   "name": "Essentials",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "author": "Emanuele Frascella",
   "description": "Clocks, calendar, to-dos, notes, links, countdown, system and weather widgets in the Windows 11 style",
   "homepage": "https://github.com/vitrine-org/essentials",
+  "icon": "assets/icon.png",
   "minEngine": "2.0.0",
   "widgets": [
     {
@@ -140,6 +141,189 @@
       "preview": "src/progress/preview.png",
       "size": { "default": [3, 2], "min": [3, 2], "max": [4, 2] },
       "permissions": []
+    },
+    {
+      "id": "conky",
+      "name": "Conky",
+      "description": "Time, system, CPU, memory, drives and network in one column",
+      "entry": "src/conky/index.tsx",
+      "settings": "src/conky/settings.json",
+      "preview": "src/conky/preview.png",
+      "size": { "default": [4, 8], "min": [3, 6], "max": [5, 10] },
+      "permissions": ["system.info", "system.cpu", "system.memory", "system.drives", "system.network", "system.battery", "net:api.open-meteo.com", "net:geocoding-api.open-meteo.com"]
     }
-  ]
+  ],
+  "locales": {
+    "it": {
+      "description": "Widget di orologi, calendario, attività, note, link, conto alla rovescia, sistema e meteo nello stile di Windows 11",
+      "widgets": {
+        "clock": { "name": "Orologio", "description": "Ora e data nel formato della tua lingua" },
+        "calendar": { "name": "Calendario", "description": "Vista del mese con oggi evidenziato" },
+        "system": { "name": "Sistema", "description": "Uso di CPU, memoria e disco" },
+        "network": { "name": "Rete", "description": "Velocità di download e upload" },
+        "battery": { "name": "Batteria", "description": "Livello di carica e stato di ricarica" },
+        "weather": { "name": "Meteo", "description": "Condizioni attuali e previsioni a 3 giorni da Open-Meteo" },
+        "analog": { "name": "Orologio analogico", "description": "Un quadrante con le lancette in movimento" },
+        "todo": { "name": "Attività", "description": "Attività da spuntare con un clic" },
+        "notes": { "name": "Nota", "description": "Un foglietto adesivo sul desktop" },
+        "links": { "name": "Link", "description": "I tuoi siti preferiti a portata di clic" },
+        "drives": { "name": "Unità", "description": "Spazio libero su ogni unità" },
+        "countdown": { "name": "Conto alla rovescia", "description": "I giorni che mancano a una data importante" },
+        "progress": { "name": "Avanzamento", "description": "Quanto è passato del giorno, della settimana, del mese e dell’anno" },
+        "conky": { "name": "Conky", "description": "Ora, sistema, CPU, memoria, unità e rete in una colonna" }
+      }
+    },
+    "fr": {
+      "description": "Widgets horloges, calendrier, tâches, notes, liens, compte à rebours, système et météo dans le style de Windows 11",
+      "widgets": {
+        "clock": { "name": "Horloge", "description": "L’heure et la date selon vos paramètres régionaux" },
+        "calendar": { "name": "Calendrier", "description": "Vue du mois avec aujourd’hui mis en évidence" },
+        "system": { "name": "Système", "description": "Utilisation du processeur, de la mémoire et du disque" },
+        "network": { "name": "Réseau", "description": "Débit descendant et montant" },
+        "battery": { "name": "Batterie", "description": "Niveau de charge et état de recharge" },
+        "weather": { "name": "Météo", "description": "Conditions actuelles et prévisions à 3 jours par Open-Meteo" },
+        "analog": { "name": "Horloge analogique", "description": "Un cadran à aiguilles" },
+        "todo": { "name": "À faire", "description": "Des tâches à cocher d’un clic" },
+        "notes": { "name": "Note", "description": "Un pense-bête sur votre bureau" },
+        "links": { "name": "Liens", "description": "Vos sites favoris en un clic" },
+        "drives": { "name": "Lecteurs", "description": "Espace libre sur chaque lecteur" },
+        "countdown": { "name": "Compte à rebours", "description": "Les jours restants avant une date importante" },
+        "progress": { "name": "Progression", "description": "La part écoulée du jour, de la semaine, du mois et de l’année" },
+        "conky": { "name": "Conky", "description": "Heure, système, processeur, mémoire, lecteurs et réseau en une colonne" }
+      }
+    },
+    "de": {
+      "description": "Uhren, Kalender, Aufgaben, Notizen, Links, Countdown, System- und Wetter-Widgets im Stil von Windows 11",
+      "widgets": {
+        "clock": { "name": "Uhr", "description": "Uhrzeit und Datum in deinem Gebietsschema" },
+        "calendar": { "name": "Kalender", "description": "Monatsansicht mit hervorgehobenem heutigen Tag" },
+        "system": { "name": "System", "description": "CPU-, Arbeitsspeicher- und Datenträgerauslastung" },
+        "network": { "name": "Netzwerk", "description": "Download- und Upload-Geschwindigkeit" },
+        "battery": { "name": "Akku", "description": "Ladestand und Ladezustand" },
+        "weather": { "name": "Wetter", "description": "Aktuelles Wetter und 3-Tage-Vorhersage von Open-Meteo" },
+        "analog": { "name": "Analoguhr", "description": "Ein Zifferblatt mit laufenden Zeigern" },
+        "todo": { "name": "Aufgaben", "description": "Aufgaben, die du mit einem Klick abhakst" },
+        "notes": { "name": "Notiz", "description": "Ein Notizzettel auf deinem Desktop" },
+        "links": { "name": "Links", "description": "Deine Lieblingsseiten, einen Klick entfernt" },
+        "drives": { "name": "Laufwerke", "description": "Freier Speicher auf jedem Laufwerk" },
+        "countdown": { "name": "Countdown", "description": "Tage bis zu einem wichtigen Datum" },
+        "progress": { "name": "Fortschritt", "description": "Wie viel von Tag, Woche, Monat und Jahr vergangen ist" },
+        "conky": { "name": "Conky", "description": "Uhrzeit, System, CPU, Arbeitsspeicher, Laufwerke und Netzwerk in einer Spalte" }
+      }
+    },
+    "es": {
+      "description": "Widgets de relojes, calendario, tareas, notas, enlaces, cuenta atrás, sistema y tiempo al estilo de Windows 11",
+      "widgets": {
+        "clock": { "name": "Reloj", "description": "Hora y fecha en tu configuración regional" },
+        "calendar": { "name": "Calendario", "description": "Vista mensual con el día de hoy resaltado" },
+        "system": { "name": "Sistema", "description": "Uso de CPU, memoria y disco" },
+        "network": { "name": "Red", "description": "Velocidad de descarga y subida" },
+        "battery": { "name": "Batería", "description": "Nivel de carga y estado de carga" },
+        "weather": { "name": "Tiempo", "description": "Condiciones actuales y previsión de 3 días de Open-Meteo" },
+        "analog": { "name": "Reloj analógico", "description": "Una esfera con agujas en movimiento" },
+        "todo": { "name": "Tareas", "description": "Tareas que marcas con un clic" },
+        "notes": { "name": "Nota", "description": "Una nota adhesiva en tu escritorio" },
+        "links": { "name": "Enlaces", "description": "Tus sitios favoritos a un clic" },
+        "drives": { "name": "Unidades", "description": "Espacio libre en cada unidad" },
+        "countdown": { "name": "Cuenta atrás", "description": "Días que faltan para una fecha importante" },
+        "progress": { "name": "Progreso", "description": "Cuánto ha pasado del día, la semana, el mes y el año" },
+        "conky": { "name": "Conky", "description": "Hora, sistema, CPU, memoria, unidades y red en una columna" }
+      }
+    },
+    "pt-BR": {
+      "description": "Widgets de relógios, calendário, tarefas, notas, links, contagem regressiva, sistema e clima no estilo do Windows 11",
+      "widgets": {
+        "clock": { "name": "Relógio", "description": "Hora e data na sua localidade" },
+        "calendar": { "name": "Calendário", "description": "Visão do mês com o dia de hoje em destaque" },
+        "system": { "name": "Sistema", "description": "Uso de CPU, memória e disco" },
+        "network": { "name": "Rede", "description": "Velocidade de download e upload" },
+        "battery": { "name": "Bateria", "description": "Nível de carga e estado de carregamento" },
+        "weather": { "name": "Clima", "description": "Condições atuais e previsão de 3 dias do Open-Meteo" },
+        "analog": { "name": "Relógio analógico", "description": "Um mostrador com ponteiros em movimento" },
+        "todo": { "name": "Tarefas", "description": "Tarefas que você marca com um clique" },
+        "notes": { "name": "Nota", "description": "Uma nota autoadesiva na sua área de trabalho" },
+        "links": { "name": "Links", "description": "Seus sites favoritos a um clique" },
+        "drives": { "name": "Unidades", "description": "Espaço livre em cada unidade" },
+        "countdown": { "name": "Contagem regressiva", "description": "Dias que faltam para uma data importante" },
+        "progress": { "name": "Progresso", "description": "Quanto já passou do dia, da semana, do mês e do ano" },
+        "conky": { "name": "Conky", "description": "Hora, sistema, CPU, memória, unidades e rede em uma coluna" }
+      }
+    },
+    "zh": {
+      "description": "Windows 11 风格的时钟、日历、待办、便笺、链接、倒计时、系统和天气小组件",
+      "widgets": {
+        "clock": { "name": "时钟", "description": "按你的区域设置显示时间和日期" },
+        "calendar": { "name": "日历", "description": "月视图，突出显示今天" },
+        "system": { "name": "系统", "description": "CPU、内存和磁盘使用率" },
+        "network": { "name": "网络", "description": "下载和上传速度" },
+        "battery": { "name": "电池", "description": "电量和充电状态" },
+        "weather": { "name": "天气", "description": "来自 Open-Meteo 的当前天气和 3 天预报" },
+        "analog": { "name": "模拟时钟", "description": "带走动指针的表盘" },
+        "todo": { "name": "待办事项", "description": "单击即可勾选的任务" },
+        "notes": { "name": "便笺", "description": "桌面上的便利贴" },
+        "links": { "name": "链接", "description": "一键打开你喜爱的网站" },
+        "drives": { "name": "驱动器", "description": "每个驱动器的可用空间" },
+        "countdown": { "name": "倒计时", "description": "距离重要日期还剩几天" },
+        "progress": { "name": "进度", "description": "今天、本周、本月和今年已过去多少" },
+        "conky": { "name": "Conky", "description": "时间、系统、CPU、内存、驱动器和网络集于一列" }
+      }
+    },
+    "ru": {
+      "description": "Часы, календарь, задачи, заметки, ссылки, обратный отсчёт, системные и погодные виджеты в стиле Windows 11",
+      "widgets": {
+        "clock": { "name": "Часы", "description": "Время и дата в формате вашего региона" },
+        "calendar": { "name": "Календарь", "description": "Месяц с выделенным сегодняшним днём" },
+        "system": { "name": "Система", "description": "Загрузка ЦП, памяти и диска" },
+        "network": { "name": "Сеть", "description": "Скорость загрузки и отдачи" },
+        "battery": { "name": "Батарея", "description": "Уровень заряда и состояние зарядки" },
+        "weather": { "name": "Погода", "description": "Текущая погода и прогноз на 3 дня от Open-Meteo" },
+        "analog": { "name": "Аналоговые часы", "description": "Циферблат с плавными стрелками" },
+        "todo": { "name": "Задачи", "description": "Задачи, которые отмечаются одним щелчком" },
+        "notes": { "name": "Заметка", "description": "Стикер на рабочем столе" },
+        "links": { "name": "Ссылки", "description": "Любимые сайты в один щелчок" },
+        "drives": { "name": "Диски", "description": "Свободное место на каждом диске" },
+        "countdown": { "name": "Обратный отсчёт", "description": "Сколько дней осталось до важной даты" },
+        "progress": { "name": "Прогресс", "description": "Сколько прошло от дня, недели, месяца и года" },
+        "conky": { "name": "Conky", "description": "Время, система, ЦП, память, диски и сеть в одном столбце" }
+      }
+    },
+    "ja": {
+      "description": "Windows 11 スタイルの時計、カレンダー、タスク、メモ、リンク、カウントダウン、システム、天気のウィジェット",
+      "widgets": {
+        "clock": { "name": "時計", "description": "地域の形式で時刻と日付を表示" },
+        "calendar": { "name": "カレンダー", "description": "今日を強調した月表示" },
+        "system": { "name": "システム", "description": "CPU、メモリ、ディスクの使用率" },
+        "network": { "name": "ネットワーク", "description": "ダウンロードとアップロードの速度" },
+        "battery": { "name": "バッテリー", "description": "残量と充電状態" },
+        "weather": { "name": "天気", "description": "Open-Meteo による現在の天気と 3 日間の予報" },
+        "analog": { "name": "アナログ時計", "description": "針が動く文字盤" },
+        "todo": { "name": "タスク", "description": "クリックでチェックできるタスク" },
+        "notes": { "name": "メモ", "description": "デスクトップの付箋" },
+        "links": { "name": "リンク", "description": "お気に入りのサイトをワンクリックで" },
+        "drives": { "name": "ドライブ", "description": "各ドライブの空き領域" },
+        "countdown": { "name": "カウントダウン", "description": "大切な日までの残り日数" },
+        "progress": { "name": "進行状況", "description": "今日、今週、今月、今年の経過" },
+        "conky": { "name": "Conky", "description": "時刻、システム、CPU、メモリ、ドライブ、ネットワークを 1 列に表示" }
+      }
+    },
+    "ko": {
+      "description": "Windows 11 스타일의 시계, 달력, 할 일, 메모, 링크, 카운트다운, 시스템 및 날씨 위젯",
+      "widgets": {
+        "clock": { "name": "시계", "description": "지역 형식에 맞춘 시간과 날짜" },
+        "calendar": { "name": "달력", "description": "오늘이 강조된 월 보기" },
+        "system": { "name": "시스템", "description": "CPU, 메모리 및 디스크 사용량" },
+        "network": { "name": "네트워크", "description": "다운로드 및 업로드 속도" },
+        "battery": { "name": "배터리", "description": "충전 수준 및 충전 상태" },
+        "weather": { "name": "날씨", "description": "Open-Meteo의 현재 날씨와 3일 예보" },
+        "analog": { "name": "아날로그 시계", "description": "바늘이 움직이는 시계" },
+        "todo": { "name": "할 일", "description": "클릭으로 완료 표시하는 작업" },
+        "notes": { "name": "메모", "description": "바탕 화면의 스티커 메모" },
+        "links": { "name": "링크", "description": "즐겨 찾는 사이트를 클릭 한 번으로" },
+        "drives": { "name": "드라이브", "description": "모든 드라이브의 사용 가능한 공간" },
+        "countdown": { "name": "카운트다운", "description": "중요한 날까지 남은 일수" },
+        "progress": { "name": "진행률", "description": "오늘, 이번 주, 이번 달, 올해가 얼마나 지났는지" },
+        "conky": { "name": "Conky", "description": "시간, 시스템, CPU, 메모리, 드라이브, 네트워크를 한 열에" }
+      }
+    }
+  }
 }

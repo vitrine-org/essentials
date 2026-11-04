@@ -21,6 +21,11 @@ pick your own.
 | **Drives**: free space on every drive | 3×1 to 4×4 | ![Drives](src/drives/preview.png) |
 | **Countdown**: days left to a date, or to New Year | 2×1 to 4×2 | ![Countdown](src/countdown/preview.png) |
 | **Progress**: how much of the day, week, month and year has gone, as bars or rings | 3×2 to 4×2 | ![Progress](src/progress/preview.png) |
+| **Conky**: one tall column in the spirit of Conky: time and date, then system, CPU and network with history charts, memory, drives and battery, plus an optional weather line; every section can be turned off | 3×6 to 5×10 (default 4×8) | ![Conky](src/conky/preview.png) |
+
+Settings, widget names and descriptions are translated into Italian, French, German, Spanish,
+Brazilian Portuguese, Simplified Chinese, Russian, Japanese and Korean (`titles` / `labels` maps in
+each `settings.json`, `locales` in `vitrine.json`).
 
 To Do and Note type through Vitrine's text flyout where the engine has it; otherwise enter tasks
 and text in the widget settings.
@@ -29,15 +34,18 @@ and text in the widget settings.
 
 ```sh
 npm install
-npm run pack      # → essentials-2.1.2.vitrine
+npm run pack      # → essentials-2.2.0.vitrine
 ```
+
+`npm run build` also copies the pack icon (`icon` in `vitrine.json`, `assets/icon.png`) into
+`dist/` with `scripts/assets.mjs`, until the SDK does it itself.
 
 `package.json` depends on `github:vitrine-org/sdk#v2.1.0`, which provides `prompt()` for the to-do
 and note text entry.
 
 Preview a widget: `vitrine render dist weather --cells 3x2 --network --out weather.png`.
 
-Regenerate every `src/<widget>/preview.png` after `npm run build` with `py scripts/previews.py` (needs Pillow and `vitrine.exe`): same theme, accent and default size for all widgets, on a transparent background, cut to the card's rounded shape over a flat neutral backdrop, so the gallery, store and website show them alike on a neutral tile.
+Regenerate every `src/<widget>/preview.png` after `npm run build` with `py scripts/previews.py` (needs Pillow and `vitrine.exe`): same theme, accent and default size for all widgets, on a transparent background, cut to the card's rounded shape just inside its hairline edge (no rim, shadow or glow) over a flat neutral backdrop, so the gallery, store and website show them alike on a neutral tile.
 
 ## License
 
