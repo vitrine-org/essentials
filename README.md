@@ -32,8 +32,8 @@ npm install
 npm run pack      # → essentials-2.1.0.vitrine
 ```
 
-`package.json` points `@vitrine/sdk` at `file:../vitrine-sdk` for local builds. Releases use
-`github:vitrine-org/sdk#v2.0.0`.
+`package.json` depends on `github:vitrine-org/sdk#v2.1.0`, which provides `prompt()` for the to-do
+and note text entry.
 
 Preview a widget: `vitrine render dist weather --cells 3x2 --network --out weather.png`.
 

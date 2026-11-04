@@ -1,7 +1,6 @@
 // Shared look for the essentials widgets: palette, surface, legible text, hover layer.
 import { createSignal, type JSX } from "solid-js";
-import * as sdk from "@vitrine/sdk";
-import { localeInfo, useAppearance, useSize, type Style } from "@vitrine/sdk";
+import { localeInfo, prompt, useAppearance, useSize, type PromptOptions, type Style } from "@vitrine/sdk";
 
 export const FONT_DISPLAY = "Segoe UI Variable Display";
 export const FONT_TEXT = "Segoe UI Variable Text";
@@ -269,45 +268,19 @@ export function HoverLayer(props: { p: Palette; hover: boolean; down: boolean; r
 
 export const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
-// Read through a copy so the bundler does not insist on an export older SDKs lack.
-const api = Object.assign({}, sdk) as Record<string, unknown>;
-
-export interface PromptOptions {
-  title?: string;
-  placeholder?: string;
-  value?: string;
-}
-
-const hostPrompt = () => (globalThis as any).__vitrine?.prompt as ((id: number, json: string) => void) | undefined;
+export type { PromptOptions } from "@vitrine/sdk";
 
 /** True when the engine can show its text-input flyout (widgets get no keyboard focus). */
-export const canAsk = () => typeof hostPrompt() === "function";
-
-// Same protocol as the SDK's `prompt()`, for SDK builds that predate it: the host is called with an
-// id and the answer arrives as a "prompt" event `{ id, value }`. Ids start high to stay clear of the SDK's.
-let askSeq = 1_000_000;
-const pending = new Map<number, (v: string | null) => void>();
-const sdkPrompt = api.prompt as ((o: PromptOptions) => Promise<string | null>) | undefined;
-if (!sdkPrompt) {
-  sdk.on("prompt", (d: { id: number; value: string | null }) => {
-    const done = pending.get(d?.id);
-    if (done) (pending.delete(d.id), done(typeof d.value === "string" ? d.value : null));
-  });
-}
+export const canAsk = () => typeof (globalThis as any).__vitrine?.prompt === "function";
 
 /**
- * Asks the user for a line of text in the host's Fluent flyout. Resolves to the text, `null` when
- * cancelled, or `undefined` when this engine has no prompt, so widgets fall back to their settings.
+ * Asks the user for a line of text in the host's Fluent flyout (the SDK's `prompt()`). Resolves to
+ * the text, `null` when cancelled, or `undefined` when this engine has no prompt, so widgets fall
+ * back to their settings.
  */
 export async function ask(opts: PromptOptions): Promise<string | null | undefined> {
-  const h = hostPrompt();
-  if (typeof h !== "function") return undefined;
-  if (sdkPrompt) return sdkPrompt(opts);
-  const id = ++askSeq;
-  return new Promise((resolve) => {
-    pending.set(id, resolve);
-    h.call((globalThis as any).__vitrine, id, JSON.stringify(opts));
-  });
+  if (!canAsk()) return undefined;
+  return prompt(opts);
 }
 
 /** The Appearance settings every widget shares (used as `useSettings` defaults). */
