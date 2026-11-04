@@ -1,6 +1,6 @@
 import { createEffect, createSignal } from "solid-js";
 import { mount, useSettings, useSize, useSystem } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, type Palette, usePalette } from "../shared/ui";
+import { Card, FONT_DISPLAY, type Palette, Txt, shadeOf, usePalette } from "../shared/ui";
 
 const HISTORY = 30;
 
@@ -18,10 +18,13 @@ function rate(bytesPerSec: number | undefined, units: string): [string, string] 
   return [v >= 100 || i === 0 ? v.toFixed(0) : v.toFixed(1), names[i]];
 }
 
-function Arrow(props: { up: boolean; color: string }) {
+function Arrow(props: { up: boolean; color: string; shade?: string }) {
   const d = () => (props.up ? "M 8 13 L 8 3 M 3.5 7.5 L 8 3 L 12.5 7.5" : "M 8 3 L 8 13 M 3.5 8.5 L 8 13 L 12.5 8.5");
   return (
-    <svg width={16} height={16} viewBox="0 0 16 16">
+    <svg width={16} height={18} viewBox="0 0 16 18">
+      {props.shade ? (
+        <path d={d()} fill="none" stroke={props.shade} strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" transform="translate(0 1)" />
+      ) : null}
       <path d={d()} fill="none" stroke={props.color} strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
@@ -48,17 +51,23 @@ function Spark(props: { values: number[]; w: number; h: number; color: string })
 function Reading(props: { p: Palette; up: boolean; value: [string, string]; label: string; history: number[]; w: number; h: number }) {
   return (
     <view style={{ flex: 1, height: "100%" }}>
-      <Spark values={props.history} w={props.w} h={props.h} color={props.up ? props.p.text2 : props.p.accent} />
-      <view style={{ height: "100%", flexDirection: "row", alignItems: "flex-start", gap: 6, paddingHorizontal: 12, paddingTop: 13 }}>
-        <view style={{ paddingTop: 3 }}>
-          <Arrow up={props.up} color={props.up ? props.p.text2 : props.p.accent} />
+      {props.p.bare ? null : <Spark values={props.history} w={props.w} h={props.h} color={props.up ? props.p.text2 : props.p.accent} />}
+      <view style={{ height: "100%", flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: 12 }}>
+        <view style={{ alignSelf: "flex-start", marginTop: Math.round((props.h - 38) / 2) + 2 }}>
+          <Arrow up={props.up} color={props.up ? props.p.text2 : props.p.accent} shade={props.p.bare ? shadeOf(props.p, 0.4) : undefined} />
         </view>
         <view style={{ flexDirection: "column" }}>
-          <text style={{ fontFamily: FONT_DISPLAY, fontSize: 18, fontWeight: 600, color: props.p.text, whiteSpace: "nowrap", lineHeight: 1.15 }}>
-            {props.value[0]}
-            <span style={{ fontSize: 11, fontWeight: 400, color: props.p.text2 }}>{" " + props.value[1]}</span>
-          </text>
-          <text style={{ fontSize: 11, color: props.p.text3, whiteSpace: "nowrap" }}>{props.label}</text>
+          <Txt p={props.p} style={{ fontFamily: FONT_DISPLAY, fontSize: 18, fontWeight: 600, color: props.p.text, whiteSpace: "nowrap", lineHeight: 1.15 }}>
+            {(t) => (
+              <>
+                {props.value[0]}
+                <span style={{ fontSize: 11, fontWeight: 400, color: t(props.p.text2) }}>{" " + props.value[1]}</span>
+              </>
+            )}
+          </Txt>
+          <Txt p={props.p} lite style={{ fontSize: 11, color: props.p.text3, whiteSpace: "nowrap" }}>
+            {() => props.label}
+          </Txt>
         </view>
       </view>
     </view>
@@ -66,7 +75,7 @@ function Reading(props: { p: Palette; up: boolean; value: [string, string]; labe
 }
 
 function Network() {
-  const s = useSettings({ theme: "auto", accent: "system", units: "bits", interval: 1 });
+  const s = useSettings({ background: "card", theme: "auto", accent: "system", units: "bits", interval: 1 });
   const p = usePalette(s);
   const size = useSize();
   const snap = useSystem(["network"], s().interval * 1000);
@@ -84,7 +93,7 @@ function Network() {
   return (
     <Card p={p()} style={{ flexDirection: "row", alignItems: "center" }}>
       <Reading p={p()} up={false} value={rate(snap().network?.rxPerSec, s().units)} label="Download" history={rx()} w={half()} h={size().height} />
-      <view style={{ width: 1, flexShrink: 0, height: "56%", background: p().divider }} />
+      <view style={{ width: 1, flexShrink: 0, height: "56%", background: p().divider, boxShadow: p().bare ? `1px 0 1px ${shadeOf(p(), 0.25)}` : undefined }} />
       <Reading p={p()} up value={rate(snap().network?.txPerSec, s().units)} label="Upload" history={tx()} w={half()} h={size().height} />
     </Card>
   );

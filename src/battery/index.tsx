@@ -1,5 +1,5 @@
 import { mount, useSettings, useSystem } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, type Palette, clamp, usePalette } from "../shared/ui";
+import { Card, FONT_DISPLAY, type Palette, Txt, clamp, usePalette } from "../shared/ui";
 
 function duration(sec: number): string {
   const h = Math.floor(sec / 3600);
@@ -10,15 +10,29 @@ function duration(sec: number): string {
 function BatteryIcon(props: { p: Palette; level: number | null; color: string; charging: boolean }) {
   const fillW = () => 19 * clamp((props.level ?? 0) / 100, 0, 1);
   return (
-    <svg width={30} height={16} viewBox="0 0 30 16">
+    <svg width={30} height={17} viewBox="0 0 30 17">
+      {props.p.bare ? (
+        <g transform="translate(0 1)" opacity={0.4}>
+          <rect x={0.75} y={1.25} width={24.5} height={13.5} rx={3.5} fill="none" stroke={`rgb(${props.p.shade})`} strokeWidth={2.4} />
+          <rect x={26.5} y={5.5} width={2.2} height={5} rx={1.1} fill={`rgb(${props.p.shade})`} />
+        </g>
+      ) : null}
       <rect x={0.75} y={1.25} width={24.5} height={13.5} rx={3.5} fill="none" stroke={props.p.text2} strokeWidth={1.3} />
       <rect x={26.5} y={5.5} width={2.2} height={5} rx={1.1} fill={props.p.text2} />
-      <rect x={3.5} y={4} width={Math.max(fillW(), props.level ? 1.5 : 0)} height={8} rx={1.5} fill={props.color} />
+      <rect
+        x={3.5}
+        y={4}
+        width={Math.max(fillW(), props.level ? 1.5 : 0)}
+        height={8}
+        rx={1.5}
+        fill={props.color}
+        style={{ transition: "width 700ms ease" }}
+      />
       {props.charging ? (
         <path
           d="M 14.6 2.2 L 9.4 8.8 L 12.8 8.8 L 11.2 13.8 L 16.6 7 L 13.2 7 Z"
           fill={props.p.text}
-          stroke={props.p.dark ? "#202020" : "#F3F3F3"}
+          stroke={props.p.bare ? `rgba(${props.p.shade}, 0.6)` : props.p.dark ? "#202020" : "#F3F3F3"}
           strokeWidth={0.9}
           strokeLinejoin="round"
         />
@@ -43,7 +57,7 @@ function PlugIcon(props: { color: string }) {
 }
 
 function Battery() {
-  const s = useSettings({ theme: "auto", accent: "system", lowThreshold: 20, showTime: true });
+  const s = useSettings({ background: "card", theme: "auto", accent: "system", lowThreshold: 20, showTime: true });
   const p = usePalette(s);
   const snap = useSystem(["battery"], 10_000);
 
@@ -64,22 +78,30 @@ function Battery() {
   };
 
   return (
-    <Card p={p()} style={{ flexDirection: "column", justifyContent: "center", paddingHorizontal: 14, gap: 2 }}>
+    <Card p={p()} style={{ flexDirection: "column", justifyContent: "center", paddingHorizontal: 16, gap: 0 }}>
       {b() && !b()!.hasBattery ? (
         <view style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
           <PlugIcon color={p().accent} />
-          <text style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 600, color: p().text }}>AC</text>
+          <Txt p={p()} style={{ fontFamily: FONT_DISPLAY, fontSize: 22, fontWeight: 600, color: p().text }}>
+            {() => "AC"}
+          </Txt>
         </view>
       ) : (
-        <view style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+        <view style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
           <BatteryIcon p={p()} level={level()} color={color()} charging={!!b()?.charging} />
-          <text style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 600, lineHeight: 1.1, color: low() ? p().critical : p().text }}>
-            {level() === null ? "–" : String(level())}
-            <span style={{ fontSize: 14, fontWeight: 400, color: p().text2 }}>%</span>
-          </text>
+          <Txt p={p()} style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 600, lineHeight: 1.1, color: low() ? p().critical : p().text }}>
+            {(t) => (
+              <>
+                {level() === null ? "–" : String(level())}
+                <span style={{ fontSize: 14, fontWeight: 400, color: t(p().text2) }}>%</span>
+              </>
+            )}
+          </Txt>
         </view>
       )}
-      <text style={{ fontSize: 12, color: p().text2, whiteSpace: "nowrap", textOverflow: "ellipsis" }}>{status()}</text>
+      <Txt p={p()} lite style={{ fontSize: 12, color: p().text2, whiteSpace: "nowrap", textOverflow: "ellipsis" }}>
+        {() => status()}
+      </Txt>
     </Card>
   );
 }

@@ -1,8 +1,8 @@
 import { formatDate, mount, useClock, useSettings, useSize } from "@vitrine/sdk";
-import { Card, FONT_DISPLAY, clamp, usePalette, uses12h } from "../shared/ui";
+import { Card, FONT_DISPLAY, Txt, clamp, usePalette, uses12h } from "../shared/ui";
 
 function Clock() {
-  const s = useSettings({ theme: "auto", accent: "system", hourFormat: "auto", showSeconds: false, showDate: true });
+  const s = useSettings({ background: "card", theme: "auto", accent: "system", hourFormat: "auto", showSeconds: false, showDate: true });
   const now = useClock(s().showSeconds ? "second" : "minute");
   const size = useSize();
   const p = usePalette(s);
@@ -13,9 +13,8 @@ function Clock() {
   const dateSize = () => (tall() ? 15 : 12);
   const chars = () => (s().showSeconds ? 3.9 : 2.6) + (h12() ? 1.1 : 0);
   const timeSize = () => {
-    const pad = tall() ? 40 : 24;
-    const byH = (size().height - pad - (s().showDate ? dateSize() * 1.4 + 2 : 0)) / 1.05;
-    const byW = (size().width - pad) / chars();
+    const byH = (size().height - (tall() ? 32 : 16) - (s().showDate ? dateSize() * 1.35 : 0)) / 1.1;
+    const byW = (size().width - (tall() ? 48 : 32)) / chars();
     return Math.floor(clamp(Math.min(byH, byW), 16, 120));
   };
   const time = () => formatDate(now(), (h12() ? "h:mm" : "HH:mm") + (s().showSeconds ? ":ss" : ""));
@@ -26,12 +25,13 @@ function Clock() {
       style={{
         flexDirection: "column",
         justifyContent: "center",
-        paddingHorizontal: tall() ? 20 : 12,
+        paddingHorizontal: tall() ? 24 : 16,
         paddingVertical: tall() ? 16 : 8,
-        gap: tall() ? 4 : 1,
+        gap: tall() ? 4 : 0,
       }}
     >
-      <text
+      <Txt
+        p={p()}
         style={{
           fontFamily: FONT_DISPLAY,
           fontSize: timeSize(),
@@ -41,18 +41,26 @@ function Clock() {
           whiteSpace: "nowrap",
         }}
       >
-        {time()}
-        {h12() ? (
-          <span style={{ fontSize: Math.round(timeSize() * 0.36), fontWeight: 500, color: p().text2 }}>
-            {" " + (formatDate(now(), "A") || (now().getHours() < 12 ? "AM" : "PM"))}
-          </span>
-        ) : null}
-      </text>
+        {(t) => (
+          <>
+            {time()}
+            {h12() ? (
+              <span style={{ fontSize: Math.round(timeSize() * 0.36), fontWeight: 500, color: t(p().text2) }}>
+                {" " + (formatDate(now(), "A") || (now().getHours() < 12 ? "AM" : "PM"))}
+              </span>
+            ) : null}
+          </>
+        )}
+      </Txt>
       {s().showDate ? (
-        <text style={{ fontSize: dateSize(), color: p().text2, whiteSpace: "nowrap", textOverflow: "ellipsis" }}>
-          <span style={{ color: p().accent, fontWeight: 600 }}>{formatDate(now(), tall() ? "dddd" : "ddd")}</span>
-          {formatDate(now(), tall() ? ", D MMMM YYYY" : " D MMM")}
-        </text>
+        <Txt p={p()} lite style={{ fontSize: dateSize(), color: p().text2, whiteSpace: "nowrap", textOverflow: "ellipsis" }}>
+          {(t) => (
+            <>
+              <span style={{ color: t(p().accent), fontWeight: 600 }}>{formatDate(now(), tall() ? "dddd" : "ddd")}</span>
+              {formatDate(now(), tall() ? ", D MMMM YYYY" : " D MMM")}
+            </>
+          )}
+        </Txt>
       ) : null}
     </Card>
   );

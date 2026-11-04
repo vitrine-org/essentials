@@ -1,7 +1,8 @@
 # Essentials for Vitrine
 
 The everyday widgets for [Vitrine](https://github.com/vitrine-widgets/vitrine), in the Windows 11 style.
-Every widget has a dark or light theme, an accent color, and its own settings in the control panel.
+Every widget comes as an acrylic card or with no background at all, drawn straight on the wallpaper with
+shadows that keep it readable. Theme and accent follow Windows, or pick your own.
 
 | Widget | Size | |
 |---|---|---|

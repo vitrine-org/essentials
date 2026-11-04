@@ -9,6 +9,7 @@
   {
     "title": "Appearance",
     "settings": {
+      "background": { "type": "string", "default": "card", "label": "Background", "options": [ { "value": "card", "label": "Acrylic card" }, { "value": "none", "label": "None" } ] },
       "theme": { "type": "string", "default": "auto", "label": "Theme", "options": [ { "value": "auto", "label": "Automatic" }, { "value": "dark", "label": "Dark" }, { "value": "light", "label": "Light" } ] },
       "accent": { "type": "string", "default": "system", "label": "Accent color", "description": "system uses the Windows accent color, or enter a hex color", "pattern": "^(system|#[0-9a-fA-F]{6})$", "patternMessage": "Use system or a hex color such as #60CDFF" }
     }
