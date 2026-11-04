@@ -1,6 +1,6 @@
-// Shared look for the essentials widgets: palette, surface, legible text, hover layer.
-import { createSignal, type JSX } from "solid-js";
-import { localeInfo, prompt, useAppearance, useSize, type PromptOptions, type Style } from "@vitrine/sdk";
+// The Essentials look: palette, acrylic card surface, legibility shadow.
+import { type JSX } from "solid-js";
+import { localeInfo, useAppearance, useSize, type Style } from "@vitrine/sdk";
 
 export const FONT_DISPLAY = "Segoe UI Variable Display";
 export const FONT_TEXT = "Segoe UI Variable Text";
@@ -213,75 +213,7 @@ export const shadeOf = (p: Palette, a: number) => `rgba(${p.shade}, ${a})`;
 export const textShadowOf = (p: Palette) =>
   p.dark ? `0 1px 4px ${shadeOf(p, 0.8)}` : `0 0 6px ${shadeOf(p, 0.75)}`;
 
-/** Colour helper handed to `Txt` content: identity for the text, the shadow tone for copies. */
-export type Tint = (color: string) => string;
-
-/**
- * Text that stays legible on any wallpaper. The shadow itself is inherited from the bare
- * Card (`textShadow`); `children` receives a tint function kept for span colours.
- */
-export function Txt(props: {
-  p: Palette;
-  style: Style;
-  box?: Style;
-  lite?: boolean;
-  children: (tint: Tint) => JSX.Element;
-}) {
-  return (
-    <view style={{ flexDirection: "column", ...props.box }}>
-      <text style={props.style}>{props.children((c) => c)}</text>
-    </view>
-  );
-}
-
-/** Hover/pressed state for interactive elements. */
-export function usePress() {
-  const [hover, setHover] = createSignal(false);
-  const [down, setDown] = createSignal(false);
-  const handlers = {
-    onPointerEnter: () => setHover(true),
-    onPointerLeave: () => (setHover(false), setDown(false)),
-    onPointerDown: () => setDown(true),
-    onPointerUp: () => setDown(false),
-  };
-  return { hover, down, handlers };
-}
-
-/**
- * A fill behind an interactive element that fades in on hover. Background colours do not
- * animate, so the layer animates its opacity instead.
- */
-export function HoverLayer(props: { p: Palette; hover: boolean; down: boolean; radius: number }) {
-  return (
-    <view
-      style={{
-        position: "absolute",
-        inset: 0,
-        borderRadius: props.radius,
-        background: props.down ? props.p.pressed : props.p.hover,
-        opacity: props.hover ? 1 : 0,
-        transition: "opacity 150ms ease",
-      }}
-    />
-  );
-}
-
 export const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
-
-export type { PromptOptions } from "@vitrine/sdk";
-
-/** True when the engine can show its text-input flyout (widgets get no keyboard focus). */
-export const canAsk = () => typeof (globalThis as any).__vitrine?.prompt === "function";
-
-/**
- * Asks the user for a line of text in the host's Fluent flyout (the SDK's `prompt()`). Resolves to
- * the text, `null` when cancelled, or `undefined` when this engine has no prompt, so widgets fall
- * back to their settings.
- */
-export async function ask(opts: PromptOptions): Promise<string | null | undefined> {
-  if (!canAsk()) return undefined;
-  return prompt(opts);
-}
 
 /** The Appearance settings every widget shares (used as `useSettings` defaults). */
 export const LOOK = { background: "card", theme: "auto", accent: "system" } as const;

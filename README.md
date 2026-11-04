@@ -1,52 +1,46 @@
 # Essentials for Vitrine
 
-The everyday widgets for [Vitrine](https://github.com/vitrine-org/vitrine), in the Windows 11 style.
-Every widget comes as an acrylic card, frosted glass that blurs and saturates the wallpaper behind it,
-or with no background at all, drawn straight on the wallpaper with shadows that keep it readable.
-Light and dark follow Windows live (Theme: System), or pick one; the accent follows Windows too, or
-pick your own.
+A single widget for [Vitrine](https://github.com/vitrine-org/vitrine), **Conky**: one tall column in
+the spirit of Conky, in the Windows 11 style.
 
-| Widget | Size | |
-|---|---|---|
-| **Clock**: time and date in your locale, 12/24-hour | 2×1 to 4×2 | ![Clock](src/clock/preview.png) |
-| **Calendar**: month view, today highlighted, previous and next month | 3×3 to 4×4 | ![Calendar](src/calendar/preview.png) |
-| **System**: CPU, memory and disk as rings or bars | 3×2 to 4×2 | ![System](src/system/preview.png) |
-| **Network**: download and upload speed | 3×1 to 4×1 | ![Network](src/network/preview.png) |
-| **Battery**: charge level, charging state, time left | 2×1 to 3×1 | ![Battery](src/battery/preview.png) |
-| **Weather**: current conditions and 3 days from [Open-Meteo](https://open-meteo.com), works offline from cache | 3×2 to 4×2 | ![Weather](src/weather/preview.png) |
-| **Analog Clock**: dial with ticks, numerals or minimal, sweeping second hand | 2×2 to 4×4 | ![Analog Clock](src/analog/preview.png) |
-| **To Do**: click a task to check it off, clear the done ones, add and edit tasks in place | 2×2 to 4×4 | ![To Do](src/todo/preview.png) |
-| **Note**: a sticky note in five tints, click to edit | 2×2 to 4×4 | ![Note](src/notes/preview.png) |
-| **Links**: up to eight sites, one click to open | 2×1 to 4×2 | ![Links](src/links/preview.png) |
-| **Drives**: free space on every drive | 3×1 to 4×4 | ![Drives](src/drives/preview.png) |
-| **Countdown**: days left to a date, or to New Year | 2×1 to 4×2 | ![Countdown](src/countdown/preview.png) |
-| **Progress**: how much of the day, week, month and year has gone, as bars or rings | 3×2 to 4×2 | ![Progress](src/progress/preview.png) |
-| **Conky**: one tall column in the spirit of Conky: time and date, then system, CPU and network with history charts, memory, drives and battery, plus an optional weather line; every section can be turned off | 3×6 to 5×10 (default 4×8) | ![Conky](src/conky/preview.png) |
+![Conky](src/conky/preview.png)
 
-Settings, widget names and descriptions, and the texts inside the widgets (`src/shared/i18n.ts`,
-picked from the Windows locale), are translated into Italian, French, German, Spanish,
-Brazilian Portuguese, Simplified Chinese, Russian, Japanese and Korean (`titles` / `labels` maps in
-each `settings.json`, `locales` in `vitrine.json`).
+- Time and date, with an optional weather line from [Open-Meteo](https://open-meteo.com).
+- **System**: host, Windows version, uptime.
+- **CPU**: usage and cores, a bar and a history chart.
+- **Memory**: used of total, with a bar.
+- **Drives**: free space and a bar for each drive.
+- **Network**: download and upload rates with a history chart.
+- **Battery**: charge and state, on devices that have one.
 
-To Do and Note type through Vitrine's text flyout where the engine has it; otherwise enter tasks
-and text in the widget settings.
+Every section can be turned off. Sizes run from 3×6 to 5×10 cells (default 4×8). When the column
+is short, the charts go first, then extra drives, then sections from the bottom. It comes as an
+acrylic card or with no background, drawn straight on the wallpaper with a shadow that keeps the
+text readable. Light and dark follow Windows live (Theme: System), or pick one. The accent follows
+Windows too, or you can pick your own.
+
+Settings, the widget name and description, and the texts inside the widget are translated into
+Italian, French, German, Spanish, Brazilian Portuguese, Simplified Chinese, Russian, Japanese and
+Korean. The settings use `titles` / `labels` maps in `settings.json`, the name and description use
+`locales` in `vitrine.json`, and the texts inside the widget are in `src/shared/i18n.ts`, picked
+from the Windows locale.
+
+Essentials 3.0 contains only Conky. The other widgets (Clock, Calendar, System, Network, Battery,
+Weather, Analog Clock, To Do, Note, Links, Drives, Countdown, Progress) were removed. They are
+still in the [2.2.1 release](https://github.com/vitrine-org/essentials/releases/tag/v2.2.1).
 
 ## Build
 
 ```sh
 npm install
-npm run pack      # → essentials-2.2.1.vitrine
+npm run pack      # → essentials-3.0.0.vitrine
 ```
 
-`npm run build` also copies the pack icon (`icon` in `vitrine.json`, `assets/icon.png`) into
-`dist/` with `scripts/assets.mjs`, until the SDK does it itself.
+Preview: `vitrine render dist conky --cells 4x8 --network --settings '{"showWeather":true}' --out conky.png`.
 
-`package.json` depends on `github:vitrine-org/sdk#v2.1.0`, which provides `prompt()` for the to-do
-and note text entry.
-
-Preview a widget: `vitrine render dist weather --cells 3x2 --network --out weather.png`.
-
-Regenerate every `src/<widget>/preview.png` after `npm run build` with `py scripts/previews.py` (needs Pillow and `vitrine.exe`): same theme, accent and default size for all widgets, on a transparent background, cut to the card's rounded shape just inside its hairline edge (no rim, shadow or glow) over a flat neutral backdrop, so the gallery, store and website show them alike on a neutral tile.
+To regenerate `src/conky/preview.png`, run `py scripts/previews.py` after `npm run build` (needs
+Pillow and `vitrine.exe`). It renders the dark theme at the default size on a transparent
+background, cut to the card's rounded shape just inside its hairline edge (no rim, shadow or glow).
 
 ## License
 

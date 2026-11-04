@@ -1,20 +1,17 @@
-# Regenerates every widget preview (src/<widget>/preview.png) the same way, for the gallery, the
+# Regenerates the widget preview (src/<widget>/preview.png), for the gallery, the
 # store and the website, which show previews on one neutral solid tile.
 #
 #   npm run build && py scripts/previews.py [--exe path\to\vitrine.exe] [widget ...]
 #
-# Essentials widgets are acrylic cards. They render over a solid #2a2a2a backdrop, so the glass
-# becomes a flat, even card, and are cut to the card's rounded shape on a transparent
-# background, just inside the 1 px hairline edge: no light rim, drop shadow or glow around the
-# card, which would read as a halo on the store's dark tiles. Every widget uses the dark theme, the same accent and its default size from
-# vitrine.json, at scale 2, with realistic sample content where the default is empty. Weather
-# renders with live data from Open-Meteo.
+# The Conky widget is an acrylic card. It renders over a solid #2a2a2a backdrop, so the glass
+# becomes a flat, even card, and is cut to the card's rounded shape on a transparent background,
+# just inside the 1 px hairline edge: no light rim, drop shadow or glow, which would read as a
+# halo on the store's dark tiles. Dark theme, the default accent and the default size from
+# vitrine.json, at scale 2, with the weather line on (live data from Open-Meteo). Headless
+# renders anonymize the host name.
 
 SETTINGS = {"theme": "dark", "background": "card", "accent": "#60CDFF"}
 EXTRA = {
-    "todo": {"items": "Book flights to Lisbon;[x] Renew passport;Call the dentist;[x] Water the plants;Send the March invoice"},
-    "notes": {"text": "Pick up the cake at 6, Giulia’s party starts at 8"},
-    "countdown": {"title": "Christmas", "date": "2026-12-25"},
     "conky": {"showWeather": True},
 }
 CARD_RADIUS = 12  # RADIUS in src/shared/ui.tsx
