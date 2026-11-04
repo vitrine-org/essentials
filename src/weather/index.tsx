@@ -2,6 +2,7 @@ import { createEffect, createSignal, For, on, onCleanup } from "solid-js";
 import { formatDate, mount, useSettings, useSize, useStorage } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, type Palette, Txt, shadeOf, usePalette, uses12h } from "../shared/ui";
 import { type Cache, type Kind, REFRESH_MS, describe, load } from "../shared/meteo";
+import { t } from "../shared/i18n";
 
 const SUN = "#FFC83D";
 const CLOUD = "M 7.2 19 L 17 19 C 19.8 19 21.6 17.1 21.6 14.8 C 21.6 12.6 19.9 10.8 17.7 10.7 C 17 8.1 14.7 6.4 12.1 6.4 C 9 6.4 6.6 8.7 6.3 11.6 C 4.2 11.9 2.6 13.6 2.6 15.4 C 2.6 17.4 4.5 19 7.2 19 Z";
@@ -142,10 +143,10 @@ function Weather() {
                 {() => data()!.place}
               </Txt>
               <Txt p={p()} lite style={{ fontSize: 12, color: error() ? p().caution : p().text2, whiteSpace: "nowrap" }}>
-                {() => (error() ? `Offline · ${updated()}` : describe(data()!.current.code, data()!.current.isDay)[1])}
+                {() => (error() ? t("offline", { t: updated() }) : describe(data()!.current.code, data()!.current.isDay)[1])}
               </Txt>
               <Txt p={p()} lite style={{ fontSize: 11, color: p().text3, whiteSpace: "nowrap" }}>
-                {() => `H ${deg(data()!.today.max)}  L ${deg(data()!.today.min)}`}
+                {() => t("hiLo", { a: deg(data()!.today.max), b: deg(data()!.today.min) })}
               </Txt>
             </view>
           </view>
@@ -159,10 +160,10 @@ function Weather() {
                   </Txt>
                   <WeatherIcon kind={describe(d.code)[0]} size={20} p={p()} />
                   <Txt p={p()} lite style={{ fontSize: 12, fontWeight: 600, color: p().text, whiteSpace: "nowrap" }}>
-                    {(t) => (
+                    {(tint) => (
                       <>
                         {deg(d.max)}
-                        <span style={{ fontWeight: 400, color: t(p().text3) }}>{"  " + deg(d.min)}</span>
+                        <span style={{ fontWeight: 400, color: tint(p().text3) }}>{"  " + deg(d.min)}</span>
                       </>
                     )}
                   </Txt>
@@ -175,15 +176,15 @@ function Weather() {
         <view style={{ flex: 1, flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4 }}>
           {error() ? <OfflineIcon p={p()} /> : null}
           <Txt p={p()} lite style={{ fontSize: 13, fontWeight: 600, color: p().text2 }}>
-            {() => (error() === "notfound" ? "City not found" : error() === "nocity" ? "No city set" : error() ? "Weather unavailable" : "Loading weather…")}
+            {() => (error() === "notfound" ? t("cityNotFound") : error() === "nocity" ? t("noCity") : error() ? t("weatherUnavailable") : t("loadingWeather"))}
           </Txt>
           <Txt p={p()} lite style={{ fontSize: 11, color: p().text3, textAlign: "center" }}>
             {() => (error() === "notfound"
-              ? `No match for “${query()}”`
+              ? t("noMatch", { q: query() })
               : error() === "nocity"
-                ? "Choose a city in the settings"
+                ? t("chooseCity")
                 : error()
-                  ? "Check your connection"
+                  ? t("checkConnection")
                   : loading()
                     ? query()
                     : "")}

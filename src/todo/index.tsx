@@ -1,6 +1,7 @@
 import { createEffect, createSignal, For } from "solid-js";
 import { mount, useSettings, useSize, useStorage } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, HoverLayer, LOOK, type Palette, Txt, ask, canAsk, clamp, shadeOf, usePalette, usePress } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 interface Item {
   id: string;
@@ -118,7 +119,7 @@ function AddRow(props: { p: Palette; onClick: () => void }) {
         </svg>
       </view>
       <Txt p={props.p} style={{ fontSize: 13, fontWeight: 600, color: props.p.accent }}>
-        {() => "Add a task"}
+        {() => t("addTask")}
       </Txt>
     </view>
   );
@@ -171,14 +172,14 @@ function Todo() {
   const toggle = (id: string) => setItems(all().map((i) => (i.id === id ? { ...i, done: !i.done } : i)));
   const clearDone = () => setItems(all().filter((i) => !i.done));
   const add = async () => {
-    const text = await ask({ title: "New task", placeholder: "What needs doing?" });
+    const text = await ask({ title: t("newTask"), placeholder: t("whatNeedsDoing") });
     if (text && text.trim()) {
       setItems([...all(), { id: newId(), text: text.trim(), done: false }]);
       setScroll(Number.MAX_SAFE_INTEGER);
     }
   };
   const edit = async (item: Item) => {
-    const text = await ask({ title: "Edit task", placeholder: "Leave empty to delete", value: item.text });
+    const text = await ask({ title: t("editTask"), placeholder: t("emptyToDelete"), value: item.text });
     if (text === null || text === undefined) return;
     const t = text.trim();
     setItems(t ? all().map((i) => (i.id === item.id ? { ...i, text: t } : i)) : all().filter((i) => i.id !== item.id));
@@ -188,12 +189,12 @@ function Todo() {
     <Card p={p()} style={{ flexDirection: "column", paddingHorizontal: 8, paddingTop: 10, paddingBottom: 10 }}>
       <view style={{ height: headH, flexShrink: 0, flexDirection: "row", alignItems: "center", paddingLeft: 8, gap: 8 }}>
         <Txt p={p()} style={{ fontFamily: FONT_DISPLAY, fontSize: 15, fontWeight: 600, color: p().text, whiteSpace: "nowrap" }}>
-          {() => s().title || "To Do"}
+          {() => (s().title && s().title !== "To Do" ? s().title : t("todo"))}
         </Txt>
         <Txt p={p()} lite box={{ flex: 1, minWidth: 0 }} style={{ fontSize: 11, color: p().text3, whiteSpace: "nowrap", marginTop: 2 }}>
-          {() => (all().length === 0 ? "" : left() === 0 ? "All done" : `${left()} left`)}
+          {() => (all().length === 0 ? "" : left() === 0 ? t("allDone") : t("nLeft", { n: left() }))}
         </Txt>
-        {doneCount() > 0 ? <TextButton p={p()} label="Clear done" onClick={clearDone} /> : null}
+        {doneCount() > 0 ? <TextButton p={p()} label={t("clearDone")} onClick={clearDone} /> : null}
       </view>
       <view
         onWheel={(e) => setScroll(clamp(clamp(scroll(), 0, maxScroll()) + ((e.deltaY ?? 0) > 0 ? 1 : -1), 0, maxScroll()))}
@@ -205,7 +206,7 @@ function Todo() {
         </For>
         {all().length === 0 && !editable ? (
           <Txt p={p()} lite box={{ paddingLeft: 8, paddingTop: 6 }} style={{ fontSize: 12, color: p().text3 }}>
-            {() => "Add tasks in the widget settings"}
+            {() => t("tasksInSettings")}
           </Txt>
         ) : null}
         {editable && shown().length < capacity() + 1 ? <AddRow p={p()} onClick={add} /> : null}

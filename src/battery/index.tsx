@@ -1,5 +1,6 @@
 import { mount, useSettings, useSystem } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, type Palette, Txt, clamp, usePalette } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 function duration(sec: number): string {
   const h = Math.floor(sec / 3600);
@@ -68,13 +69,13 @@ function Battery() {
   const color = () => (b()?.charging ? p().success : low() ? p().critical : b()?.saver ? p().caution : p().text);
   const status = () => {
     const x = b();
-    if (!x) return "Reading battery…";
-    if (!x.hasBattery) return "Plugged in";
-    if (x.charging) return "Charging";
-    if (ac()) return level() === 100 ? "Fully charged" : "Plugged in";
-    if (x.saver) return "Battery saver on";
-    if (s().showTime && x.remainingSeconds) return `${duration(x.remainingSeconds)} left`;
-    return low() ? "Low battery" : "On battery";
+    if (!x) return t("readingBattery");
+    if (!x.hasBattery) return t("pluggedIn");
+    if (x.charging) return t("charging");
+    if (ac()) return level() === 100 ? t("fullyCharged") : t("pluggedIn");
+    if (x.saver) return t("saverOn");
+    if (s().showTime && x.remainingSeconds) return t("timeLeft", { t: duration(x.remainingSeconds) });
+    return low() ? t("lowBattery") : t("onBattery");
   };
 
   return (
@@ -90,10 +91,10 @@ function Battery() {
         <view style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
           <BatteryIcon p={p()} level={level()} color={color()} charging={!!b()?.charging} />
           <Txt p={p()} style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 600, lineHeight: 1.1, color: low() ? p().critical : p().text }}>
-            {(t) => (
+            {(tint) => (
               <>
                 {level() === null ? "–" : String(level())}
-                <span style={{ fontSize: 14, fontWeight: 400, color: t(p().text2) }}>%</span>
+                <span style={{ fontSize: 14, fontWeight: 400, color: tint(p().text2) }}>%</span>
               </>
             )}
           </Txt>

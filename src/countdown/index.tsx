@@ -1,5 +1,6 @@
 import { formatDate, mount, useClock, useSettings, useSize } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, LOOK, Txt, clamp, usePalette } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 const DAY = 86_400_000;
 
@@ -11,7 +12,6 @@ function target(date: string, time: string, now: Date): Date {
   return new Date(now.getFullYear() + 1, 0, 1, hh, mm);
 }
 
-const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
 
 function Countdown() {
   const s = useSettings({ ...LOOK, title: "", date: "", time: "00:00", showProgress: true });
@@ -20,7 +20,7 @@ function Countdown() {
   const now = useClock("minute");
 
   const when = () => target(s().date, s().time, now());
-  const title = () => s().title.trim() || (s().date ? formatDate(when(), "D MMMM YYYY") : `New Year ${when().getFullYear()}`);
+  const title = () => s().title.trim() || (s().date ? formatDate(when(), "D MMMM YYYY") : t("newYear", { y: when().getFullYear() }));
   const left = () => when().getTime() - now().getTime();
   const past = () => left() <= 0;
   const abs = () => Math.abs(left());
@@ -31,17 +31,17 @@ function Countdown() {
     return Math.round(Math.abs(b.getTime() - a.getTime()) / DAY);
   };
   const big = () => {
-    if (days() >= 1) return { n: String(days()), unit: days() === 1 ? "day" : "days" };
+    if (days() >= 1) return { n: String(days()), unit: t("day", { n: days() }) };
     const h = Math.floor(abs() / 3_600_000);
-    if (h >= 1) return { n: String(h), unit: h === 1 ? "hour" : "hours" };
-    return { n: String(Math.max(past() ? 0 : 1, Math.ceil(abs() / 60_000))), unit: "min" };
+    if (h >= 1) return { n: String(h), unit: t("hour", { n: h }) };
+    return { n: String(Math.max(past() ? 0 : 1, Math.ceil(abs() / 60_000))), unit: t("min") };
   };
   const detail = () => {
-    if (past() && abs() < DAY) return "Today";
+    if (past() && abs() < DAY) return t("today");
     const h = Math.floor((abs() % DAY) / 3_600_000);
     const m = Math.floor((abs() % 3_600_000) / 60_000);
-    const rest = days() >= 1 ? `${plural(h, "hour", "hours")} ${m} min` : `${m} min`;
-    return past() ? `${rest} ago` : `${formatDate(when(), "ddd D MMM")}${s().time !== "00:00" ? formatDate(when(), " · HH:mm") : ""}`;
+    const rest = days() >= 1 ? `${h} ${t("hour", { n: h })} ${m} ${t("min")}` : `${m} ${t("min")}`;
+    return past() ? t("ago", { t: rest }) : `${formatDate(when(), "ddd D MMM")}${s().time !== "00:00" ? formatDate(when(), " · HH:mm") : ""}`;
   };
   // Progress from when the countdown was most plausibly set: a year before the target, at most.
   const progress = () => clamp(1 - left() / (365 * DAY), 0, 1);
@@ -55,10 +55,10 @@ function Countdown() {
         {() => title()}
       </Txt>
       <Txt p={p()} style={{ fontFamily: FONT_DISPLAY, fontSize: numSize(), fontWeight: 600, lineHeight: 1.05, color: p().text, whiteSpace: "nowrap" }}>
-        {(t) => (
+        {(tint) => (
           <>
             {big().n}
-            <span style={{ fontSize: Math.round(numSize() * 0.34), fontWeight: 600, color: t(p().text2) }}>
+            <span style={{ fontSize: Math.round(numSize() * 0.34), fontWeight: 600, color: tint(p().text2) }}>
               {" " + big().unit + (past() && abs() >= DAY ? " ago" : "")}
             </span>
           </>

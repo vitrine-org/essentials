@@ -1,6 +1,7 @@
 import { createEffect } from "solid-js";
 import { formatDate, mount, useSettings, useSize, useStorage } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, HoverLayer, LOOK, type Palette, Txt, ask, canAsk, clamp, usePalette, usePress } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 // Sticky-note tints from the brand colours, laid over the glass: [r, g, b].
 const TINTS: Record<string, [number, number, number]> = {
@@ -40,7 +41,7 @@ function Notes() {
   const text = () => note()?.text ?? "";
   const editable = canAsk();
   const edit = async () => {
-    const t = await ask({ title: "Note", placeholder: "Write something to remember", value: text() });
+    const t = await ask({ title: t("note"), placeholder: t("notePlaceholder"), value: text() });
     if (t === null || t === undefined) return;
     setNote({ text: t.trim(), edited: Date.now() });
   };
@@ -68,7 +69,7 @@ function Notes() {
       <view style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
         <view style={{ width: 3, height: 12, borderRadius: 2, background: accent(), opacity: 0.8 }} />
         <Txt p={p()} lite style={{ fontSize: 11, fontWeight: 600, color: p().text2, letterSpacing: 0.4, textTransform: "uppercase" }}>
-          {() => "Note"}
+          {() => t("note")}
         </Txt>
       </view>
       <view style={{ flex: 1, minHeight: 0, overflow: "hidden" }}>
@@ -83,12 +84,12 @@ function Notes() {
             whiteSpace: "normal",
           }}
         >
-          {() => text() || (editable ? "Click to write a note" : "Write your note in the widget settings")}
+          {() => text() || (editable ? t("clickToWrite") : t("noteInSettings"))}
         </Txt>
       </view>
       {note() && size().height >= 130 ? (
         <Txt p={p()} lite style={{ fontSize: 10, color: p().text3 }}>
-          {() => `Edited ${formatDate(note()!.edited, "D MMM, HH:mm")}`}
+          {() => t("edited", { d: formatDate(note()!.edited, "D MMM, HH:mm") })}
         </Txt>
       ) : null}
       {/* On top, so the whole note is one click target. */}

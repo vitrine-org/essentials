@@ -23,7 +23,8 @@ pick your own.
 | **Progress**: how much of the day, week, month and year has gone, as bars or rings | 3×2 to 4×2 | ![Progress](src/progress/preview.png) |
 | **Conky**: one tall column in the spirit of Conky: time and date, then system, CPU and network with history charts, memory, drives and battery, plus an optional weather line; every section can be turned off | 3×6 to 5×10 (default 4×8) | ![Conky](src/conky/preview.png) |
 
-Settings, widget names and descriptions are translated into Italian, French, German, Spanish,
+Settings, widget names and descriptions, and the texts inside the widgets (`src/shared/i18n.ts`,
+picked from the Windows locale), are translated into Italian, French, German, Spanish,
 Brazilian Portuguese, Simplified Chinese, Russian, Japanese and Korean (`titles` / `labels` maps in
 each `settings.json`, `locales` in `vitrine.json`).
 
@@ -34,7 +35,7 @@ and text in the widget settings.
 
 ```sh
 npm install
-npm run pack      # → essentials-2.2.0.vitrine
+npm run pack      # → essentials-2.2.1.vitrine
 ```
 
 `npm run build` also copies the pack icon (`icon` in `vitrine.json`, `assets/icon.png`) into

@@ -1,6 +1,7 @@
 import { Index } from "solid-js";
 import { formatBytes, mount, useSettings, useSize, useSystem } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, LOOK, type Palette, Txt, clamp, shadeOf, usePalette } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 type Drive = { name: string; label: string; total: number; free: number; used: number };
 
@@ -11,7 +12,9 @@ function Row(props: { p: Palette; d: Drive; show: string; width: number; compact
   const tone = () => (used() >= 0.9 ? props.p.critical : props.p.accent);
   const letter = () => props.d.name.replace(/\\$/, "");
   const detail = () =>
-    (props.show === "used" ? `${size0(props.d.used)} used` : `${size0(props.d.free)} free`) + (props.wide ? ` of ${size0(props.d.total)}` : "");
+    props.wide
+      ? t(props.show === "used" ? "usedOf" : "freeOf", { a: size0(props.show === "used" ? props.d.used : props.d.free), b: size0(props.d.total) })
+      : t(props.show === "used" ? "usedAmt" : "freeAmt", { a: size0(props.show === "used" ? props.d.used : props.d.free) });
   return (
     <view style={{ flexDirection: "column", gap: props.compact ? 4 : 6, flexShrink: 0 }}>
       <view style={{ flexDirection: "row", alignItems: "flex-end", gap: 6 }}>
@@ -24,10 +27,10 @@ function Row(props: { p: Palette; d: Drive; show: string; width: number; compact
           box={{ flex: 1, minWidth: 0 }}
           style={{ fontSize: 12, color: props.p.text3, whiteSpace: "nowrap", textOverflow: "ellipsis", marginBottom: 1 }}
         >
-          {() => (props.compact ? "" : props.d.label || "Local Disk")}
+          {() => (props.compact ? "" : props.d.label || t("localDisk"))}
         </Txt>
         <Txt p={props.p} lite style={{ fontSize: 11, color: props.p.text2, whiteSpace: "nowrap", marginBottom: 1 }}>
-          {() => (props.compact || props.pct ? `${Math.round(used() * 100)}% used` : detail())}
+          {() => (props.compact || props.pct ? t("pctUsed", { p: Math.round(used() * 100) }) : detail())}
         </Txt>
       </view>
       <view
@@ -75,21 +78,21 @@ function Drives() {
       {header() && all().length ? (
         <view style={{ flexDirection: "row", alignItems: "flex-end", gap: 6, height: 30, flexShrink: 0 }}>
           <Txt p={p()} style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 600, lineHeight: 1.1, color: p().text, whiteSpace: "nowrap" }}>
-            {(t) => (
+            {(tint) => (
               <>
                 {formatBytes(free(), 0).split(" ")[0]}
-                <span style={{ fontSize: 13, fontWeight: 600, color: t(p().text2) }}>{" " + formatBytes(free(), 0).split(" ")[1] + " free"}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: tint(p().text2) }}>{" " + formatBytes(free(), 0).split(" ")[1] + " " + t("free")}</span>
               </>
             )}
           </Txt>
           <Txt p={p()} lite box={{ flex: 1, minWidth: 0, alignItems: "flex-end" }} style={{ fontSize: 11, color: p().text3, whiteSpace: "nowrap", marginBottom: 3 }}>
-            {() => `${all().length === 1 ? "1 drive" : `${all().length} drives`} · ${formatBytes(total(), 0)}`}
+            {() => `${t("drivesN", { n: all().length })} · ${formatBytes(total(), 0)}`}
           </Txt>
         </view>
       ) : null}
       {drives().length === 0 ? (
         <Txt p={p()} lite style={{ fontSize: 12, color: p().text3 }}>
-          {() => "Reading drives…"}
+          {() => t("readingDrives")}
         </Txt>
       ) : null}
       <Index each={drives()}>{(d) => <Row p={p()} d={d()} show={s().show} width={size().width - 32} compact={compact()} wide={wide()} pct={header() && all().length === 1} />}</Index>

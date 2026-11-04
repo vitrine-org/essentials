@@ -1,5 +1,6 @@
 // Open-Meteo current conditions and forecast, shared by the Weather and Conky widgets.
 import { localeInfo } from "@vitrine/sdk";
+import { t } from "./i18n";
 
 export const REFRESH_MS = 30 * 60 * 1000;
 
@@ -25,16 +26,16 @@ export type Kind = "sun" | "moon" | "partly" | "partly-night" | "cloud" | "fog" 
 
 /** WMO weather code → icon kind and label. */
 export function describe(code: number, day = true): [Kind, string] {
-  if (code === 0) return [day ? "sun" : "moon", day ? "Sunny" : "Clear"];
-  if (code === 1) return [day ? "sun" : "moon", "Mostly clear"];
-  if (code === 2) return [day ? "partly" : "partly-night", "Partly cloudy"];
-  if (code === 3) return ["cloud", "Cloudy"];
-  if (code === 45 || code === 48) return ["fog", "Fog"];
-  if (code >= 51 && code <= 57) return ["drizzle", "Drizzle"];
-  if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return ["rain", code >= 80 ? "Showers" : code >= 65 ? "Heavy rain" : "Rain"];
-  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return ["snow", "Snow"];
-  if (code >= 95) return ["storm", "Thunderstorm"];
-  return ["cloud", "Cloudy"];
+  if (code === 0) return [day ? "sun" : "moon", t(day ? "sunny" : "clear")];
+  if (code === 1) return [day ? "sun" : "moon", t("mostlyClear")];
+  if (code === 2) return [day ? "partly" : "partly-night", t("partlyCloudy")];
+  if (code === 3) return ["cloud", t("cloudy")];
+  if (code === 45 || code === 48) return ["fog", t("fog")];
+  if (code >= 51 && code <= 57) return ["drizzle", t("drizzle")];
+  if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return ["rain", t(code >= 80 ? "showers" : code >= 65 ? "heavyRain" : "rain")];
+  if ((code >= 71 && code <= 77) || code === 85 || code === 86) return ["snow", t("snow")];
+  if (code >= 95) return ["storm", t("storm")];
+  return ["cloud", t("cloudy")];
 }
 
 const day = (d: Day): Day => ({ date: d.date, code: d.code, max: Math.round(d.max), min: Math.round(d.min) });

@@ -3,6 +3,7 @@
 import { createEffect, createSignal, For, type JSX, on, onCleanup } from "solid-js";
 import { formatBytes, formatDate, mount, useClock, useSettings, useSize, useStorage, useSystem } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, FONT_SMALL, FONT_TEXT, LOOK, type Palette, clamp, shadeOf, usePalette, uses12h } from "../shared/ui";
+import { t } from "../shared/i18n";
 import { type Cache, REFRESH_MS, describe, load } from "../shared/meteo";
 
 const HISTORY = 48;
@@ -321,19 +322,19 @@ function Conky() {
 
       {shown("system") ? (
         <view style={{ flexDirection: "column", marginTop: plan().gap, flexShrink: 0 }}>
-          <Title p={p()} text="System" />
+          <Title p={p()} text={t("system")} />
           <view style={{ height: INNER }} />
-          <Row p={p()} label="Host" value={sys()?.hostname || "–"} />
-          <Row p={p()} label="OS" value={sys()?.os ? sys()!.os.replace(/\s*\(build [^)]*\)/i, "") : "–"} strong={false} />
-          <Row p={p()} label="Uptime" value={sys() ? uptime(sys()!.uptime) : "–"} />
+          <Row p={p()} label={t("host")} value={sys()?.hostname || "–"} />
+          <Row p={p()} label={t("os")} value={sys()?.os ? sys()!.os.replace(/\s*\(build [^)]*\)/i, "") : "–"} strong={false} />
+          <Row p={p()} label={t("uptime")} value={sys() ? uptime(sys()!.uptime) : "–"} />
         </view>
       ) : null}
 
       {shown("cpu") ? (
         <view style={{ flexDirection: "column", marginTop: plan().gap, flexShrink: 0 }}>
-          <Title p={p()} text="CPU" />
+          <Title p={p()} text={t("cpu")} />
           <view style={{ height: INNER }} />
-          <Row p={p()} label="Usage" note={cpu() ? `${cpu()!.cores} cores` : undefined} value={cpu() ? `${Math.round(cpu()!.usage)}%` : "–"} />
+          <Row p={p()} label={t("usage")} note={cpu() ? t("cores", { n: cpu()!.cores }) : undefined} value={cpu() ? `${Math.round(cpu()!.usage)}%` : "–"} />
           <Bar p={p()} value={(cpu()?.usage ?? 0) / 100} width={inner()} />
           {plan().sparks ? <Spark p={p()} area={cpuH()} max={100} width={inner()} /> : null}
         </view>
@@ -341,11 +342,11 @@ function Conky() {
 
       {shown("memory") ? (
         <view style={{ flexDirection: "column", marginTop: plan().gap, flexShrink: 0 }}>
-          <Title p={p()} text="Memory" />
+          <Title p={p()} text={t("memory")} />
           <view style={{ height: INNER }} />
           <Row
             p={p()}
-            label="Used"
+            label={t("used")}
             note={mem() ? `${Math.round((mem()!.used / mem()!.total) * 100)}%` : undefined}
             value={mem() ? `${bytesNum(mem()!.used)} / ${formatBytes(mem()!.total, 0)}` : "–"}
           />
@@ -355,7 +356,7 @@ function Conky() {
 
       {shown("drives") ? (
         <view style={{ flexDirection: "column", marginTop: plan().gap, flexShrink: 0 }}>
-          <Title p={p()} text="Drives" />
+          <Title p={p()} text={t("drives")} />
           <view style={{ height: INNER }} />
           <view style={{ flexDirection: "column", gap: DRIVE_GAP }}>
             <For each={drives().slice(0, plan().drives)}>
@@ -364,8 +365,8 @@ function Conky() {
                   <Row
                     p={p()}
                     label={<span style={{ color: p().text, fontWeight: 600 }}>{d.name.replace(/\\$/, "")}</span>}
-                    note={inner() >= 220 ? d.label || "Local Disk" : undefined}
-                    value={`${one(d.free)} free`}
+                    note={inner() >= 220 ? d.label || t("localDisk") : undefined}
+                    value={t("freeAmt", { a: one(d.free) })}
                   />
                   <Bar p={p()} value={d.used / d.total} width={inner()} />
                 </view>
@@ -377,27 +378,27 @@ function Conky() {
 
       {shown("network") ? (
         <view style={{ flexDirection: "column", marginTop: plan().gap, flexShrink: 0 }}>
-          <Title p={p()} text="Network" />
+          <Title p={p()} text={t("network")} />
           <view style={{ height: INNER }} />
           <Row
             p={p()}
-            label="Download"
+            label={t("download")}
             dot={plan().sparks ? p().accent : undefined}
             value={rate(net()?.rxPerSec, s().units)}
           />
-          <Row p={p()} label="Upload" dot={plan().sparks ? p().text3 : undefined} value={rate(net()?.txPerSec, s().units)} />
+          <Row p={p()} label={t("upload")} dot={plan().sparks ? p().text3 : undefined} value={rate(net()?.txPerSec, s().units)} />
           {plan().sparks ? <Spark p={p()} area={rxH()} line={txH()} width={inner()} /> : null}
         </view>
       ) : null}
 
       {shown("battery") && battery() ? (
         <view style={{ flexDirection: "column", marginTop: plan().gap, flexShrink: 0 }}>
-          <Title p={p()} text="Battery" />
+          <Title p={p()} text={t("battery")} />
           <view style={{ height: INNER }} />
           <Row
             p={p()}
-            label={battery()!.charging ? "Charging" : battery()!.powerSource === "ac" ? "Plugged in" : "On battery"}
-            note={!battery()!.charging && battery()!.remainingSeconds ? `${duration(battery()!.remainingSeconds!)} left` : undefined}
+            label={battery()!.charging ? t("charging") : battery()!.powerSource === "ac" ? t("pluggedIn") : t("onBattery")}
+            note={!battery()!.charging && battery()!.remainingSeconds ? t("timeLeft", { t: duration(battery()!.remainingSeconds!) }) : undefined}
             value={`${Math.round(battery()!.level!)}%`}
           />
           <Bar

@@ -1,6 +1,7 @@
 import { createEffect, createSignal } from "solid-js";
 import { mount, useSettings, useSize, useSystem } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, type Palette, Txt, shadeOf, usePalette } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 const HISTORY = 30;
 
@@ -58,10 +59,10 @@ function Reading(props: { p: Palette; up: boolean; value: [string, string]; labe
         </view>
         <view style={{ flexDirection: "column" }}>
           <Txt p={props.p} style={{ fontFamily: FONT_DISPLAY, fontSize: 18, fontWeight: 600, color: props.p.text, whiteSpace: "nowrap", lineHeight: 1.15 }}>
-            {(t) => (
+            {(tint) => (
               <>
                 {props.value[0]}
-                <span style={{ fontSize: 11, fontWeight: 400, color: t(props.p.text2) }}>{" " + props.value[1]}</span>
+                <span style={{ fontSize: 11, fontWeight: 400, color: tint(props.p.text2) }}>{" " + props.value[1]}</span>
               </>
             )}
           </Txt>
@@ -92,9 +93,9 @@ function Network() {
   const half = () => Math.floor((size().width - 2) / 2);
   return (
     <Card p={p()} style={{ flexDirection: "row", alignItems: "center" }}>
-      <Reading p={p()} up={false} value={rate(snap().network?.rxPerSec, s().units)} label="Download" history={rx()} w={half()} h={size().height} />
+      <Reading p={p()} up={false} value={rate(snap().network?.rxPerSec, s().units)} label={t("download")} history={rx()} w={half()} h={size().height} />
       <view style={{ width: 1, flexShrink: 0, height: "56%", background: p().divider, boxShadow: p().bare ? `1px 0 1px ${shadeOf(p(), 0.25)}` : undefined }} />
-      <Reading p={p()} up value={rate(snap().network?.txPerSec, s().units)} label="Upload" history={tx()} w={half()} h={size().height} />
+      <Reading p={p()} up value={rate(snap().network?.txPerSec, s().units)} label={t("upload")} history={tx()} w={half()} h={size().height} />
     </Card>
   );
 }

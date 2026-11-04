@@ -1,6 +1,7 @@
 import { For } from "solid-js";
 import { mount, openUrl, useSettings, useSize } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, HoverLayer, LOOK, type Palette, Txt, clamp, shadeOf, usePalette, usePress } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 interface Link {
   name: string;
@@ -104,7 +105,7 @@ function Links() {
     <Card p={p()} style={{ flexDirection: "row", flexWrap: "wrap", alignContent: "center", justifyContent: "center", paddingHorizontal: 8, paddingVertical: 6 }}>
       {links().length === 0 ? (
         <Txt p={p()} lite style={{ fontSize: 12, color: p().text3 }}>
-          {() => "Add links in settings"}
+          {() => t("addLinks")}
         </Txt>
       ) : null}
       <For each={links()}>

@@ -1,6 +1,7 @@
 import { Index } from "solid-js";
 import { formatDate, localeInfo, mount, useClock, useSettings, useSize } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, LOOK, type Palette, Txt, clamp, shadeOf, usePalette } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 interface Span {
   label: string;
@@ -16,21 +17,21 @@ function spans(now: Date, firstDay: number, show: { day: boolean; week: boolean;
   const m = now.getMonth();
   const d = now.getDate();
   const out: Span[] = [];
-  if (show.day) out.push({ label: "Today", detail: cap(formatDate(now, "dddd")), value: frac(now, new Date(y, m, d), new Date(y, m, d + 1)) });
+  if (show.day) out.push({ label: t("today"), detail: cap(formatDate(now, "dddd")), value: frac(now, new Date(y, m, d), new Date(y, m, d + 1)) });
   if (show.week) {
     const back = (now.getDay() - firstDay + 7) % 7;
     const a = new Date(y, m, d - back);
-    out.push({ label: "Week", detail: `Day ${back + 1} of 7`, value: frac(now, a, new Date(y, m, d - back + 7)) });
+    out.push({ label: t("week"), detail: t("dayOf", { a: back + 1, b: 7 }), value: frac(now, a, new Date(y, m, d - back + 7)) });
   }
   if (show.month) {
     const len = new Date(y, m + 1, 0).getDate();
-    out.push({ label: cap(formatDate(now, "MMMM")), detail: `Day ${d} of ${len}`, value: frac(now, new Date(y, m, 1), new Date(y, m + 1, 1)) });
+    out.push({ label: cap(formatDate(now, "MMMM")), detail: t("dayOf", { a: d, b: len }), value: frac(now, new Date(y, m, 1), new Date(y, m + 1, 1)) });
   }
   if (show.year) {
     const a = new Date(y, 0, 1);
     const b = new Date(y + 1, 0, 1);
     const n = Math.floor((new Date(y, m, d).getTime() - a.getTime()) / 86_400_000) + 1;
-    out.push({ label: String(y), detail: `Day ${n} of ${Math.round((b.getTime() - a.getTime()) / 86_400_000)}`, value: frac(now, a, b) });
+    out.push({ label: String(y), detail: t("dayOf", { a: n, b: Math.round((b.getTime() - a.getTime()) / 86_400_000) }), value: frac(now, a, b) });
   }
   return out;
 }
@@ -90,10 +91,10 @@ function Ring(props: { p: Palette; s: Span; d: number }) {
         </svg>
         <view style={{ position: "absolute", inset: 0, alignItems: "center", justifyContent: "center" }}>
           <Txt p={props.p} style={{ fontFamily: FONT_DISPLAY, fontSize: Math.round(props.d * 0.26), fontWeight: 600, color: props.p.text }}>
-            {(t) => (
+            {(tint) => (
               <>
                 {String(Math.floor(props.s.value * 100))}
-                <span style={{ fontSize: Math.round(props.d * 0.16), fontWeight: 400, color: t(props.p.text2) }}>%</span>
+                <span style={{ fontSize: Math.round(props.d * 0.16), fontWeight: 400, color: tint(props.p.text2) }}>%</span>
               </>
             )}
           </Txt>

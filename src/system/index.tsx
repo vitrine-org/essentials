@@ -1,6 +1,7 @@
 import { Index } from "solid-js";
 import { formatBytes, mount, useSettings, useSize, useSystem } from "@vitrine/sdk";
 import { Card, FONT_DISPLAY, type Palette, Txt, clamp, shadeOf, usePalette } from "../shared/ui";
+import { t } from "../shared/i18n";
 
 interface Gauge {
   label: string;
@@ -42,10 +43,10 @@ function Ring(props: { p: Palette; g: Gauge; d: number }) {
         </svg>
         <view style={{ position: "absolute", inset: 0, alignItems: "center", justifyContent: "center" }}>
           <Txt p={props.p} style={{ fontFamily: FONT_DISPLAY, fontSize: Math.round(props.d * 0.26), fontWeight: 600, color: props.p.text }}>
-            {(t) => (
+            {(tint) => (
               <>
                 {props.g.value === null ? "–" : String(Math.round(v() * 100))}
-                <span style={{ fontSize: Math.round(props.d * 0.16), fontWeight: 400, color: t(props.p.text2) }}>%</span>
+                <span style={{ fontSize: Math.round(props.d * 0.16), fontWeight: 400, color: tint(props.p.text2) }}>%</span>
               </>
             )}
           </Txt>
@@ -110,16 +111,16 @@ function System() {
     const letter = (s().drive || "C").toUpperCase();
     const drive = drives?.find((d) => d.name.toUpperCase().startsWith(letter + ":"));
     return [
-      { label: "CPU", value: cpu ? clamp(cpu.usage / 100, 0, 1) : null, detail: cpu ? `${cpu.cores} cores` : "" },
+      { label: t("cpu"), value: cpu ? clamp(cpu.usage / 100, 0, 1) : null, detail: cpu ? t("cores", { n: cpu.cores }) : "" },
       {
-        label: "Memory",
+        label: t("memory"),
         value: memory ? clamp(memory.used / memory.total, 0, 1) : null,
         detail: memory ? `${gb(memory.used)} / ${formatBytes(memory.total, 0)}` : "",
       },
       {
-        label: `Disk ${letter}:`,
+        label: t("disk", { l: letter }),
         value: drive && drive.total > 0 ? clamp(drive.used / drive.total, 0, 1) : null,
-        detail: drive ? `${formatBytes(drive.free, 0)} free` : "",
+        detail: drive ? t("freeAmt", { a: formatBytes(drive.free, 0) }) : "",
       },
     ];
   };
