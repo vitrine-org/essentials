@@ -1,0 +1,81 @@
+[
+  {
+    "title": "Countdown",
+    "settings": {
+      "title": {
+        "type": "string",
+        "default": "",
+        "label": "Title",
+        "description": "Empty uses the date"
+      },
+      "date": {
+        "type": "string",
+        "default": "",
+        "label": "Date",
+        "description": "YYYY-MM-DD; empty counts down to New Year",
+        "pattern": "^(|\\d{4}-\\d{2}-\\d{2})$",
+        "patternMessage": "Use a date such as 2026-12-25"
+      },
+      "time": {
+        "type": "string",
+        "default": "00:00",
+        "label": "Time",
+        "pattern": "^([01]?\\d|2[0-3]):[0-5]\\d$",
+        "patternMessage": "Use a 24-hour time such as 18:30"
+      },
+      "showProgress": {
+        "type": "boolean",
+        "default": true,
+        "label": "Show progress bar"
+      }
+    }
+  },
+  {
+    "title": "Appearance",
+    "settings": {
+      "background": {
+        "type": "string",
+        "default": "card",
+        "label": "Background",
+        "options": [
+          {
+            "value": "card",
+            "label": "Acrylic card"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+      },
+      "theme": {
+        "type": "string",
+        "default": "auto",
+        "label": "Theme",
+        "description": "System follows Windows light or dark mode",
+        "options": [
+          {
+            "value": "auto",
+            "label": "System"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ]
+      },
+      "accent": {
+        "type": "string",
+        "default": "system",
+        "label": "Accent color",
+        "description": "system uses the Windows accent color, or enter a hex color",
+        "pattern": "^(system|#[0-9a-fA-F]{6})$",
+        "patternMessage": "Use system or a hex color such as #60CDFF"
+      }
+    }
+  }
+]

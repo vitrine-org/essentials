@@ -1,0 +1,111 @@
+[
+  {
+    "title": "Note",
+    "settings": {
+      "text": {
+        "type": "string",
+        "default": "",
+        "label": "Text",
+        "description": "Replaces the note when changed; click the note to edit it in place"
+      },
+      "tint": {
+        "type": "string",
+        "default": "sun",
+        "label": "Colour",
+        "options": [
+          {
+            "value": "none",
+            "label": "Glass"
+          },
+          {
+            "value": "sun",
+            "label": "Sun"
+          },
+          {
+            "value": "mint",
+            "label": "Mint"
+          },
+          {
+            "value": "coral",
+            "label": "Coral"
+          },
+          {
+            "value": "sky",
+            "label": "Sky"
+          }
+        ]
+      },
+      "fontSize": {
+        "type": "string",
+        "default": "auto",
+        "label": "Text size",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Fit to note"
+          },
+          {
+            "value": "13",
+            "label": "Small"
+          },
+          {
+            "value": "16",
+            "label": "Medium"
+          },
+          {
+            "value": "20",
+            "label": "Large"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "title": "Appearance",
+    "settings": {
+      "background": {
+        "type": "string",
+        "default": "card",
+        "label": "Background",
+        "options": [
+          {
+            "value": "card",
+            "label": "Acrylic card"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+      },
+      "theme": {
+        "type": "string",
+        "default": "auto",
+        "label": "Theme",
+        "description": "System follows Windows light or dark mode",
+        "options": [
+          {
+            "value": "auto",
+            "label": "System"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ]
+      },
+      "accent": {
+        "type": "string",
+        "default": "system",
+        "label": "Accent color",
+        "description": "system uses the Windows accent color, or enter a hex color",
+        "pattern": "^(system|#[0-9a-fA-F]{6})$",
+        "patternMessage": "Use system or a hex color such as #60CDFF"
+      }
+    }
+  }
+]

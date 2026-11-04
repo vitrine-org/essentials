@@ -43,8 +43,8 @@ const CLOUD = "M 7.2 19 L 17 19 C 19.8 19 21.6 17.1 21.6 14.8 C 21.6 12.6 19.9 1
 
 function Glyph(props: { kind: Kind; size: number; p: Palette; shade?: string }) {
   const col = (c: string) => props.shade ?? c;
-  const cloudFill = () => col(props.p.dark ? "#C8CDD6" : "#9AA3AF");
-  const cloudBack = () => col(props.p.dark ? "#8C939E" : "#C3C9D1");
+  const cloudFill = () => col(props.p.dark ? "#C8CDD6" : "#7D8796");
+  const cloudBack = () => col(props.p.dark ? "#8C939E" : "#A9B2BE");
   const rays = (cx: number, cy: number, r1: number, r2: number) =>
     Array.from({ length: 8 }, (_, i) => {
       const a = (i * Math.PI) / 4;
@@ -87,9 +87,9 @@ function Glyph(props: { kind: Kind; size: number; p: Palette; shade?: string }) 
         <g>
           <path d={CLOUD} fill={k() === "storm" ? cloudBack() : cloudFill()} transform="translate(0.5 -3.5)" />
           {k() === "drizzle"
-            ? drops("M 8 18.5 L 7.5 20 M 12.5 18.5 L 12 20 M 17 18.5 L 16.5 20", col("#4CC2FF"))
+            ? drops("M 8 18.5 L 7.5 20 M 12.5 18.5 L 12 20 M 17 18.5 L 16.5 20", col(props.p.dark ? "#4CC2FF" : "#0A8BD6"))
             : k() === "rain"
-              ? drops("M 8 18 L 6.8 21.5 M 12.5 18 L 11.3 21.5 M 17 18 L 15.8 21.5", col("#4CC2FF"))
+              ? drops("M 8 18 L 6.8 21.5 M 12.5 18 L 11.3 21.5 M 17 18 L 15.8 21.5", col(props.p.dark ? "#4CC2FF" : "#0A8BD6"))
               : k() === "snow"
                 ? (
                   <g fill={col(props.p.dark ? "#FFFFFF" : "#7A8594")}>

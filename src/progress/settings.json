@@ -1,0 +1,113 @@
+[
+  {
+    "title": "Progress",
+    "settings": {
+      "style": {
+        "type": "string",
+        "default": "bars",
+        "label": "Style",
+        "options": [
+          {
+            "value": "bars",
+            "label": "Bars"
+          },
+          {
+            "value": "rings",
+            "label": "Rings"
+          }
+        ]
+      },
+      "showDay": {
+        "type": "boolean",
+        "default": true,
+        "label": "Today"
+      },
+      "showWeek": {
+        "type": "boolean",
+        "default": true,
+        "label": "This week"
+      },
+      "showMonth": {
+        "type": "boolean",
+        "default": true,
+        "label": "This month"
+      },
+      "showYear": {
+        "type": "boolean",
+        "default": true,
+        "label": "This year"
+      },
+      "firstDayOfWeek": {
+        "type": "string",
+        "default": "auto",
+        "label": "Week starts on",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Follow Windows"
+          },
+          {
+            "value": "1",
+            "label": "Monday"
+          },
+          {
+            "value": "0",
+            "label": "Sunday"
+          },
+          {
+            "value": "6",
+            "label": "Saturday"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "title": "Appearance",
+    "settings": {
+      "background": {
+        "type": "string",
+        "default": "card",
+        "label": "Background",
+        "options": [
+          {
+            "value": "card",
+            "label": "Acrylic card"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+      },
+      "theme": {
+        "type": "string",
+        "default": "auto",
+        "label": "Theme",
+        "description": "System follows Windows light or dark mode",
+        "options": [
+          {
+            "value": "auto",
+            "label": "System"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ]
+      },
+      "accent": {
+        "type": "string",
+        "default": "system",
+        "label": "Accent color",
+        "description": "system uses the Windows accent color, or enter a hex color",
+        "pattern": "^(system|#[0-9a-fA-F]{6})$",
+        "patternMessage": "Use system or a hex color such as #60CDFF"
+      }
+    }
+  }
+]

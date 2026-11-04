@@ -1,0 +1,71 @@
+[
+  {
+    "title": "To Do",
+    "settings": {
+      "title": {
+        "type": "string",
+        "default": "To Do",
+        "label": "Title"
+      },
+      "items": {
+        "type": "string",
+        "default": "",
+        "label": "Add tasks",
+        "description": "Separate tasks with ; (each is added once and then kept in the widget)"
+      },
+      "hideDone": {
+        "type": "boolean",
+        "default": false,
+        "label": "Hide completed tasks"
+      }
+    }
+  },
+  {
+    "title": "Appearance",
+    "settings": {
+      "background": {
+        "type": "string",
+        "default": "card",
+        "label": "Background",
+        "options": [
+          {
+            "value": "card",
+            "label": "Acrylic card"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+      },
+      "theme": {
+        "type": "string",
+        "default": "auto",
+        "label": "Theme",
+        "description": "System follows Windows light or dark mode",
+        "options": [
+          {
+            "value": "auto",
+            "label": "System"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ]
+      },
+      "accent": {
+        "type": "string",
+        "default": "system",
+        "label": "Accent color",
+        "description": "system uses the Windows accent color, or enter a hex color",
+        "pattern": "^(system|#[0-9a-fA-F]{6})$",
+        "patternMessage": "Use system or a hex color such as #60CDFF"
+      }
+    }
+  }
+]

@@ -1,0 +1,112 @@
+[
+  {
+    "title": "Links",
+    "settings": {
+      "link1": {
+        "type": "string",
+        "default": "GitHub | https://github.com",
+        "label": "Link 1",
+        "description": "Name | https://address",
+        "pattern": "^(|[^|]*\\|\\s*\\S+|\\S+)$",
+        "patternMessage": "Use Name | https://address"
+      },
+      "link2": {
+        "type": "string",
+        "default": "Outlook | https://outlook.live.com",
+        "label": "Link 2",
+        "pattern": "^(|[^|]*\\|\\s*\\S+|\\S+)$",
+        "patternMessage": "Use Name | https://address"
+      },
+      "link3": {
+        "type": "string",
+        "default": "YouTube | https://www.youtube.com",
+        "label": "Link 3",
+        "pattern": "^(|[^|]*\\|\\s*\\S+|\\S+)$",
+        "patternMessage": "Use Name | https://address"
+      },
+      "link4": {
+        "type": "string",
+        "default": "Maps | https://www.google.com/maps",
+        "label": "Link 4",
+        "pattern": "^(|[^|]*\\|\\s*\\S+|\\S+)$",
+        "patternMessage": "Use Name | https://address"
+      },
+      "link5": {
+        "type": "string",
+        "default": "",
+        "label": "Link 5",
+        "pattern": "^(|[^|]*\\|\\s*\\S+|\\S+)$",
+        "patternMessage": "Use Name | https://address"
+      },
+      "link6": {
+        "type": "string",
+        "default": "",
+        "label": "Link 6",
+        "pattern": "^(|[^|]*\\|\\s*\\S+|\\S+)$",
+        "patternMessage": "Use Name | https://address"
+      },
+      "link7": {
+        "type": "string",
+        "default": "",
+        "label": "Link 7",
+        "pattern": "^(|[^|]*\\|\\s*\\S+|\\S+)$",
+        "patternMessage": "Use Name | https://address"
+      },
+      "link8": {
+        "type": "string",
+        "default": "",
+        "label": "Link 8",
+        "pattern": "^(|[^|]*\\|\\s*\\S+|\\S+)$",
+        "patternMessage": "Use Name | https://address"
+      }
+    }
+  },
+  {
+    "title": "Appearance",
+    "settings": {
+      "background": {
+        "type": "string",
+        "default": "card",
+        "label": "Background",
+        "options": [
+          {
+            "value": "card",
+            "label": "Acrylic card"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+      },
+      "theme": {
+        "type": "string",
+        "default": "auto",
+        "label": "Theme",
+        "description": "System follows Windows light or dark mode",
+        "options": [
+          {
+            "value": "auto",
+            "label": "System"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ]
+      },
+      "accent": {
+        "type": "string",
+        "default": "system",
+        "label": "Accent color",
+        "description": "system uses the Windows accent color, or enter a hex color",
+        "pattern": "^(system|#[0-9a-fA-F]{6})$",
+        "patternMessage": "Use system or a hex color such as #60CDFF"
+      }
+    }
+  }
+]

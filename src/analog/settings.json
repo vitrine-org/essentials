@@ -1,0 +1,84 @@
+[
+  {
+    "title": "Clock",
+    "settings": {
+      "face": {
+        "type": "string",
+        "default": "ticks",
+        "label": "Dial",
+        "options": [
+          {
+            "value": "ticks",
+            "label": "Minute ticks"
+          },
+          {
+            "value": "numbers",
+            "label": "Numerals"
+          },
+          {
+            "value": "minimal",
+            "label": "Minimal"
+          }
+        ]
+      },
+      "showSeconds": {
+        "type": "boolean",
+        "default": true,
+        "label": "Second hand"
+      },
+      "showDate": {
+        "type": "boolean",
+        "default": true,
+        "label": "Show date"
+      }
+    }
+  },
+  {
+    "title": "Appearance",
+    "settings": {
+      "background": {
+        "type": "string",
+        "default": "card",
+        "label": "Background",
+        "options": [
+          {
+            "value": "card",
+            "label": "Acrylic card"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ]
+      },
+      "theme": {
+        "type": "string",
+        "default": "auto",
+        "label": "Theme",
+        "description": "System follows Windows light or dark mode",
+        "options": [
+          {
+            "value": "auto",
+            "label": "System"
+          },
+          {
+            "value": "light",
+            "label": "Light"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ]
+      },
+      "accent": {
+        "type": "string",
+        "default": "system",
+        "label": "Accent color",
+        "description": "system uses the Windows accent color, or enter a hex color",
+        "pattern": "^(system|#[0-9a-fA-F]{6})$",
+        "patternMessage": "Use system or a hex color such as #60CDFF"
+      }
+    }
+  }
+]

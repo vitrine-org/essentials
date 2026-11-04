@@ -1,9 +1,9 @@
 {
   "id": "dev.vitrine.essentials",
   "name": "Essentials",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": "Emanuele Frascella",
-  "description": "Clock, calendar, system, network, battery and weather widgets in the Windows 11 style",
+  "description": "Clocks, calendar, to-dos, notes, links, countdown, system and weather widgets in the Windows 11 style",
   "homepage": "https://github.com/vitrine-org/essentials",
   "minEngine": "2.0.0",
   "widgets": [
@@ -67,6 +67,79 @@
       "preview": "src/weather/preview.png",
       "size": { "default": [3, 2], "min": [3, 2], "max": [4, 2] },
       "permissions": ["net:api.open-meteo.com", "net:geocoding-api.open-meteo.com"]
+    },
+    {
+      "id": "analog",
+      "name": "Analog Clock",
+      "description": "A clock face with sweeping hands",
+      "entry": "src/analog/index.tsx",
+      "settings": "src/analog/settings.json",
+      "preview": "src/analog/preview.png",
+      "size": { "default": [2, 2], "min": [2, 2], "max": [4, 4] },
+      "permissions": []
+    },
+    {
+      "id": "todo",
+      "name": "To Do",
+      "description": "Tasks you check off with a click",
+      "entry": "src/todo/index.tsx",
+      "settings": "src/todo/settings.json",
+      "preview": "src/todo/preview.png",
+      "size": { "default": [3, 3], "min": [2, 2], "max": [4, 4] },
+      "interactive": true,
+      "permissions": []
+    },
+    {
+      "id": "notes",
+      "name": "Note",
+      "description": "A sticky note on your desktop",
+      "entry": "src/notes/index.tsx",
+      "settings": "src/notes/settings.json",
+      "preview": "src/notes/preview.png",
+      "size": { "default": [2, 2], "min": [2, 2], "max": [4, 4] },
+      "interactive": true,
+      "permissions": []
+    },
+    {
+      "id": "links",
+      "name": "Links",
+      "description": "Your favourite sites, one click away",
+      "entry": "src/links/index.tsx",
+      "settings": "src/links/settings.json",
+      "preview": "src/links/preview.png",
+      "size": { "default": [3, 1], "min": [2, 1], "max": [4, 2] },
+      "interactive": true,
+      "permissions": []
+    },
+    {
+      "id": "drives",
+      "name": "Drives",
+      "description": "Free space on every drive",
+      "entry": "src/drives/index.tsx",
+      "settings": "src/drives/settings.json",
+      "preview": "src/drives/preview.png",
+      "size": { "default": [3, 2], "min": [3, 1], "max": [4, 4] },
+      "permissions": ["system.drives"]
+    },
+    {
+      "id": "countdown",
+      "name": "Countdown",
+      "description": "Days left to a date that matters",
+      "entry": "src/countdown/index.tsx",
+      "settings": "src/countdown/settings.json",
+      "preview": "src/countdown/preview.png",
+      "size": { "default": [2, 2], "min": [2, 1], "max": [4, 2] },
+      "permissions": []
+    },
+    {
+      "id": "progress",
+      "name": "Progress",
+      "description": "How much of the day, week, month and year has passed",
+      "entry": "src/progress/index.tsx",
+      "settings": "src/progress/settings.json",
+      "preview": "src/progress/preview.png",
+      "size": { "default": [3, 2], "min": [3, 2], "max": [4, 2] },
+      "permissions": []
     }
   ]
 }
