@@ -110,15 +110,15 @@ export function palette(look: LookSettings, system = { dark: true, accent: "#007
           shade: "255, 255, 255",
         };
   }
-  // Acrylic, layered like the website's `.acrylic`: a translucent gradient tint over the
-  // blurred, saturated wallpaper, a hairline edge, an inner top highlight and a soft lower shade.
+  // Acrylic in the Windows 11 flyout manner: a flat, mostly opaque tint over the blurred
+  // wallpaper (readable on any picture), a hairline edge and a 1 px inner top highlight.
   return dark
     ? {
         ...common,
-        surface: "linear-gradient(160deg, rgba(56, 58, 64, 0.58), rgba(22, 23, 27, 0.50))",
+        surface: "rgba(30, 30, 32, 0.84)",
         border: "rgba(255, 255, 255, 0.13)",
-        highlight: "rgba(255, 255, 255, 0.16)",
-        lowlight: "rgba(0, 0, 0, 0.22)",
+        highlight: "rgba(255, 255, 255, 0.10)",
+        lowlight: "rgba(0, 0, 0, 0)",
         text: "#F4F4F4",
         text2: "rgba(255, 255, 255, 0.80)",
         text3: "rgba(255, 255, 255, 0.58)",
@@ -133,10 +133,10 @@ export function palette(look: LookSettings, system = { dark: true, accent: "#007
       }
     : {
         ...common,
-        surface: "linear-gradient(160deg, rgba(255, 255, 255, 0.80), rgba(242, 248, 255, 0.62))",
-        border: "rgba(255, 255, 255, 0.72)",
-        highlight: "rgba(255, 255, 255, 0.95)",
-        lowlight: "rgba(20, 32, 110, 0.10)",
+        surface: "rgba(250, 250, 250, 0.86)",
+        border: "rgba(0, 0, 0, 0.08)",
+        highlight: "rgba(255, 255, 255, 0.9)",
+        lowlight: "rgba(0, 0, 0, 0)",
         text: "#141414",
         text2: "rgba(20, 20, 20, 0.74)",
         text3: "rgba(20, 20, 20, 0.54)",
@@ -168,7 +168,7 @@ export const RADIUS = 12;
 
 /**
  * The widget surface. Card: acrylic glass (backdrop blur + saturation of the wallpaper behind the
- * widget, a tinted gradient, hairline edge, inner top highlight). Bare: nothing, text shadows only.
+ * widget, a flat tint, hairline edge, inner top highlight). Bare: nothing, text shadows only.
  */
 export function Card(props: { p: Palette; style?: Style; children?: JSX.Element }) {
   const size = useSize();
@@ -178,7 +178,7 @@ export function Card(props: { p: Palette; style?: Style; children?: JSX.Element 
     const h = Math.max(24, size().height || 100);
     const px = (v: number) => ((v / h) * 100).toFixed(2) + "%";
     const p = props.p;
-    return `linear-gradient(180deg, ${p.highlight} 0%, ${p.highlight} ${px(1)}, rgba(255, 255, 255, 0.05) ${px(2)}, rgba(255, 255, 255, 0) 38%, rgba(0, 0, 0, 0) 62%, ${p.lowlight} 100%)`;
+    return `linear-gradient(180deg, ${p.highlight} 0%, ${p.highlight} ${px(1)}, rgba(255, 255, 255, 0) ${px(1.5)}, rgba(255, 255, 255, 0) 100%)`;
   };
   return (
     <view
@@ -188,7 +188,7 @@ export function Card(props: { p: Palette; style?: Style; children?: JSX.Element 
           height: "100%",
           borderRadius: RADIUS,
           background: props.p.surface,
-          backdropFilter: props.p.bare ? undefined : "blur(16px) saturate(1.6)",
+          backdropFilter: props.p.bare ? undefined : "blur(24px) saturate(1.2)",
           border: props.p.bare ? undefined : `1px solid ${props.p.border}`,
           color: props.p.text,
           fontFamily: FONT_TEXT,
