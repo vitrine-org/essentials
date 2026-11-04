@@ -1,5 +1,5 @@
 // Shared look for the essentials widgets: palette, surface, legible text, hover layer.
-import { createSignal, For, type JSX } from "solid-js";
+import { createSignal, type JSX } from "solid-js";
 import { localeInfo, useAppearance, type Style } from "@vitrine/sdk";
 
 export const FONT_DISPLAY = "Segoe UI Variable Display";
@@ -168,6 +168,7 @@ export function Card(props: { p: Palette; style?: Style; children?: JSX.Element 
         color: props.p.text,
         fontFamily: FONT_TEXT,
         overflow: props.p.bare ? "visible" : "hidden",
+        textShadow: props.p.bare ? textShadowOf(props.p) : "none",
         ...props.style,
       }}
     >
@@ -179,37 +180,16 @@ export function Card(props: { p: Palette; style?: Style; children?: JSX.Element 
 /** `rgba()` of the palette's shadow tone. */
 export const shadeOf = (p: Palette, a: number) => `rgba(${p.shade}, ${a})`;
 
-interface Offset {
-  x: number;
-  y: number;
-  a: number;
-}
-
-/**
- * Shadow copies for a text of `size` px. The renderer has no text-shadow, so a thin outline
- * (four 1-unit copies) plus a soft drop is approximated with offset copies under the text.
- * Dark text on light wallpapers gets a lighter, symmetric glow instead of a drop.
- */
-function offsets(size: number, lite: boolean, darkText: boolean): Offset[] {
-  const u = size >= 40 ? 1.5 : 1;
-  const k = darkText ? 0.75 : 1;
-  const ring = [
-    { x: u, y: 0, a: 0.28 * k },
-    { x: -u, y: 0, a: 0.28 * k },
-    { x: 0, y: -u, a: 0.24 * k },
-    { x: 0, y: u, a: 0.34 * k },
-  ];
-  const drop = darkText ? [] : [{ x: 0, y: u * 2, a: 0.22 }];
-  return lite && darkText ? ring.slice(0, 2).concat(ring[3]) : [...ring, ...drop];
-}
+/** The legibility shadow for bare widgets: a dark blur under light text, a light glow under dark text. */
+export const textShadowOf = (p: Palette) =>
+  p.dark ? `0 1px 4px ${shadeOf(p, 0.8)}` : `0 0 6px ${shadeOf(p, 0.75)}`;
 
 /** Colour helper handed to `Txt` content: identity for the text, the shadow tone for copies. */
 export type Tint = (color: string) => string;
 
 /**
- * Text that stays legible on any wallpaper. In card mode it is plain text; when the palette
- * is bare it draws shadow copies beneath. `children` receives a tint function: wrap every
- * span colour in it so the copies are painted in the shadow tone.
+ * Text that stays legible on any wallpaper. The shadow itself is inherited from the bare
+ * Card (`textShadow`); `children` receives a tint function kept for span colours.
  */
 export function Txt(props: {
   p: Palette;
@@ -218,27 +198,8 @@ export function Txt(props: {
   lite?: boolean;
   children: (tint: Tint) => JSX.Element;
 }) {
-  const size = () => (typeof props.style.fontSize === "number" ? props.style.fontSize : 14);
   return (
     <view style={{ flexDirection: "column", ...props.box }}>
-      {props.p.bare ? (
-        <For each={offsets(size(), !!props.lite, !props.p.dark)}>
-          {(o) => (
-            <text
-              style={{
-                ...props.style,
-                position: "absolute",
-                left: o.x,
-                top: o.y,
-                width: "100%",
-                color: shadeOf(props.p, o.a),
-              }}
-            >
-              {props.children(() => shadeOf(props.p, o.a))}
-            </text>
-          )}
-        </For>
-      ) : null}
       <text style={props.style}>{props.children((c) => c)}</text>
     </view>
   );
