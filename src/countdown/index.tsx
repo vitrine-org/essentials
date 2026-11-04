@@ -58,7 +58,7 @@ function Countdown() {
         {(t) => (
           <>
             {big().n}
-            <span style={{ fontSize: Math.round(numSize() * 0.34), fontWeight: 500, color: t(p().text2) }}>
+            <span style={{ fontSize: Math.round(numSize() * 0.34), fontWeight: 600, color: t(p().text2) }}>
               {" " + big().unit + (past() && abs() >= DAY ? " ago" : "")}
             </span>
           </>

@@ -29,13 +29,15 @@ and text in the widget settings.
 
 ```sh
 npm install
-npm run pack      # → essentials-2.1.0.vitrine
+npm run pack      # → essentials-2.1.2.vitrine
 ```
 
 `package.json` depends on `github:vitrine-org/sdk#v2.1.0`, which provides `prompt()` for the to-do
 and note text entry.
 
 Preview a widget: `vitrine render dist weather --cells 3x2 --network --out weather.png`.
+
+Regenerate every `src/<widget>/preview.png` after `npm run build` with `py scripts/previews.py` (needs Pillow and `vitrine.exe`): same theme, accent and default size for all widgets, on a transparent background, cut to the card's rounded shape over a flat neutral backdrop, so the gallery, store and website show them alike on a neutral tile.
 
 ## License
 

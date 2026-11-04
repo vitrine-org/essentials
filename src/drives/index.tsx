@@ -78,7 +78,7 @@ function Drives() {
             {(t) => (
               <>
                 {formatBytes(free(), 0).split(" ")[0]}
-                <span style={{ fontSize: 13, fontWeight: 500, color: t(p().text2) }}>{" " + formatBytes(free(), 0).split(" ")[1] + " free"}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: t(p().text2) }}>{" " + formatBytes(free(), 0).split(" ")[1] + " free"}</span>
               </>
             )}
           </Txt>

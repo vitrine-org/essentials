@@ -45,7 +45,7 @@ function Clock() {
           <>
             {time()}
             {h12() ? (
-              <span style={{ fontSize: Math.round(timeSize() * 0.36), fontWeight: 500, color: t(p().text2) }}>
+              <span style={{ fontSize: Math.round(timeSize() * 0.36), fontWeight: 600, color: t(p().text2) }}>
                 {" " + (formatDate(now(), "A") || (now().getHours() < 12 ? "AM" : "PM"))}
               </span>
             ) : null}
