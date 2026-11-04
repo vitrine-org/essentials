@@ -1,6 +1,6 @@
 # Essentials for Vitrine
 
-The everyday widgets for [Vitrine](https://github.com/vitrine-widgets/vitrine), in the Windows 11 style.
+The everyday widgets for [Vitrine](https://github.com/vitrine-org/vitrine), in the Windows 11 style.
 Every widget comes as an acrylic card or with no background at all, drawn straight on the wallpaper with
 shadows that keep it readable. Theme and accent follow Windows, or pick your own.
 
@@ -21,7 +21,7 @@ npm run pack      # → essentials-2.0.0.vitrine
 ```
 
 `package.json` points `@vitrine/sdk` at `file:../vitrine-sdk` for local builds. Releases use
-`github:vitrine-widgets/sdk#v2.0.0`.
+`github:vitrine-org/sdk#v2.0.0`.
 
 Preview a widget: `vitrine render dist weather --cells 3x2 --network --out weather.png`.
 
