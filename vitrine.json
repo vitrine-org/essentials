@@ -1,7 +1,7 @@
 {
   "id": "dev.vitrine.essentials",
   "name": "Essentials",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "Emanuele Frascella",
   "description": "A Conky-style column for the Windows 11 desktop: time, system, CPU, memory, drives, network and battery",
   "homepage": "https://github.com/vitrine-org/essentials",

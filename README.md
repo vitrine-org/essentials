@@ -13,8 +13,8 @@ the spirit of Conky, in the Windows 11 style.
 - **Network**: download and upload rates with a history chart.
 - **Battery**: charge and state, on devices that have one.
 
-Every section can be turned off. Sizes run from 3×6 to 5×10 cells (default 4×8). When the column
-is short, the charts go first, then extra drives, then sections from the bottom. It comes as an
+Every section can be turned off. Sizes run from 3×6 to 5×10 cells (default 4×8). The column scales
+with the widget and every enabled section always shows; rows, bars and charts span its width. It comes as an
 acrylic card or with no background, drawn straight on the wallpaper with a shadow that keeps the
 text readable. Light and dark follow Windows live (Theme: System), or pick one. The accent follows
 Windows too, or you can pick your own.
@@ -33,7 +33,7 @@ still in the [2.2.1 release](https://github.com/vitrine-org/essentials/releases/
 
 ```sh
 npm install
-npm run pack      # → essentials-3.0.0.vitrine
+npm run pack      # → essentials-3.1.0.vitrine
 ```
 
 Preview: `vitrine render dist conky --cells 4x8 --network --settings '{"showWeather":true}' --out conky.png`.
