@@ -105,7 +105,7 @@ function Analog() {
               left: c() - d() * 0.2,
               top: c() + r() * 0.3,
               width: d() * 0.4,
-              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <text style={{ fontSize: Math.max(9, Math.round(d() * 0.075)), fontWeight: 600, color: p().text3, letterSpacing: 0.5, textTransform: "uppercase" }}>
